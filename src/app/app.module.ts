@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MenubarModule } from 'primeng/menubar';
 import { SliderModule } from 'primeng/slider';
@@ -11,6 +12,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ListboxModule } from 'primeng/listbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {AnimateModule} from 'primeng/animate';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +35,8 @@ import { SpeechComponent } from './speech/speech.component';
   imports: [
     FormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    AnimateModule,
     AppRoutingModule,
     MenubarModule,
     SliderModule,
@@ -40,6 +47,9 @@ import { SpeechComponent } from './speech/speech.component';
     SkeletonModule,
     ListboxModule,
     ToggleButtonModule,
+    MessagesModule,
+    MessageModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,17 +9,18 @@ html {
   overflow: hidden;
 }
 
-p-card {
-  margin-top: 5em !important;
-  background: blue !important;
-}
-
-p-card {
-  .p-card-shadow {
-    background: #f4f4f4;
+#container {
+  p-card {
+    margin-top: 5em !important;
+    background: blue !important;
   }
-  .p-card-title {
-    color: rgb(77, 77, 77);
+  p-card {
+    .p-card-shadow {
+      background: #f4f4f4;
+    }
+    .p-card-title {
+      color: rgb(77, 77, 77);
+    }
   }
 }
 
