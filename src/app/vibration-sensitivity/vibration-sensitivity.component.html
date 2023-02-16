@@ -1,0 +1,20 @@
+<div class="option">
+  <p-card
+    header="Vibration Sensitivity"
+    subheader="Calibrate the vibration intensity of the AR glasses"
+    styleClass="p-card-shadow"
+  >
+    <ng-template pTemplate="header">
+      <!-- <img alt="Card" src="assets/showcase/images/usercard.png" /> -->
+
+      <div style="height:200px; background:green"></div>
+    </ng-template>
+    <p-slider [(ngModel)]="this.noiseSensitivity" [step]="10"></p-slider>
+
+    <div class="option-value">{{ this.noiseSensitivity }}%</div>
+    <ng-template pTemplate="footer">
+      <!-- <p-button label="Save" icon="pi pi-check"></p-button>
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button> -->
+    </ng-template>
+  </p-card>
+</div>
