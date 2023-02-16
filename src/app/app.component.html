@@ -1,16 +1,28 @@
-<div id="container" *ngIf="connected">
-  <p-menubar [model]="items">
-    <p-button icon="pi pi-power-off" label="Disconnect"></p-button>
-  </p-menubar>
+<p-menubar *ngIf="connected" [model]="items">
+  <p-button icon="pi pi-power-off" label="Disconnect"></p-button>
+</p-menubar>
 
-  <router-outlet></router-outlet>
-</div>
-
-
-<div class="login-container" *ngIf="!connected">
-  <img src="https://p4-ofp.static.pub/fes/cms/2021/07/13/d08vvw6963nf8oeqzjk3p2zfqshaff525920.png" style="height: 200px; width:auto;" alt="">
-  <p>Not connected to AR Glasses.</p>
-  <p>Check that the power of the device is on and connected the device via bluetooth</p>
-
-  <p-button (onClick)="this.connect()">Connect</p-button>
+<div class="scrollable-container">
+  <div id="container" *ngIf="connected">
+    
+    <router-outlet></router-outlet>
+  </div>
+  
+  
+  <div class="login-container" *ngIf="!connected">
+    <!-- <img src="/src/assets/glasses-solid.svg" style="height: 200px; width:200px; width:auto;" alt=""> -->
+    <p>Not connected to AR Glasses.</p>
+    
+    <p>Check that the power of the device is on and connected the device via bluetooth</p>
+    <svg
+    id="be452e83-5912-4855-80f8-a79ecab91838"
+    data-name="Layer 1"
+    xmlns="http://www.w3.org/2000/svg"
+    width="915.11162"
+    height="600.53015"
+    viewBox="0 0 915.11162 600.53015"
+  ></svg>
+    <p-button (onClick)="this.connect()">Connect</p-button>
+  </div>
+  
 </div>

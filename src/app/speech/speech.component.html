@@ -1,9 +1,32 @@
 <div class="speech-to-text-container">
-  <h2 id="title">Speech to Text</h2>
+  <div class="speech-row-container">
+    <div id="speech-log">
+      <h2>Speech Log</h2>
 
-  <textarea pInputTextarea [rows]="25" [cols]="100"  [autoResize]="true"></textarea>
+      <div id="speech-log-text">
+        <textarea
+          pInputTextarea
+          [rows]="25"
+          [cols]="100"
+          [autoResize]="true"
+          disabled="true"
+        ></textarea>
+      </div>
+    </div>
 
-  <div id="action-buttons">
-    <p-button (onClick)="clearText"> Clear Text</p-button>
+    <div id="column-buttons">
+      <p-button (onClick)="(clearText)"> Clear Text</p-button>
+      <p-button> Copy Data</p-button>
+
+      <p-divider></p-divider>
+    
+      <p-toggleButton
+        onLabel="Pause"
+        onIcon="pi pi-pause"
+        offIcon="pi pi-stop-circle"
+        offLabel="Record"
+      >
+      </p-toggleButton>
+    </div>
   </div>
 </div>

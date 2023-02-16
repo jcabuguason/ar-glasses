@@ -1,26 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-body, html{
-  margin:0px;
-  padding:0px;
+body,
+html {
+  margin: 0px;
+  padding: 0px;
   height: 100%;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif !important;
   scroll-behavior: smooth;
+  overflow: hidden;
 }
 
-p-card{
-  margin-top:200px !important;
-  background: blue !important
+p-card {
+  margin-top: 5em !important;
+  background: blue !important;
 }
 
-p-card{
-  .p-card-shadow{
-    background: #f4f4f4
+p-card {
+  .p-card-shadow {
+    background: #f4f4f4;
   }
-  .p-card-title{
-    color:rgb(77, 77, 77);
+  .p-card-title {
+    color: rgb(77, 77, 77);
   }
 }
 
-.p-component .p-slider{
+.p-component .p-slider {
   background: lightblue;
+}
+
+#column-buttons {
+  .p-button {
+    min-width: 10em;
+    text-justify: auto;
+  }
 }

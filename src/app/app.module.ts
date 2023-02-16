@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {MenubarModule} from 'primeng/menubar';
-import {SliderModule} from 'primeng/slider';
-import {CardModule} from 'primeng/card';
-import {DividerModule} from 'primeng/divider';
-import {ButtonModule} from 'primeng/button';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {SkeletonModule} from 'primeng/skeleton';
+import { MenubarModule } from 'primeng/menubar';
+import { SliderModule } from 'primeng/slider';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ListboxModule } from 'primeng/listbox';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +25,7 @@ import { SpeechComponent } from './speech/speech.component';
     NoiseSensitivityComponent,
     VibrationSensitivityComponent,
     ConnectionComponent,
-    SpeechComponent
+    SpeechComponent,
   ],
   imports: [
     FormsModule,
@@ -36,8 +38,10 @@ import { SpeechComponent } from './speech/speech.component';
     ButtonModule,
     InputTextareaModule,
     SkeletonModule,
+    ListboxModule,
+    ToggleButtonModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

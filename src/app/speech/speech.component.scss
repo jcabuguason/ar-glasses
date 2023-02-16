@@ -1,8 +1,31 @@
-.speech-to-text-container{
-  margin:auto;
-  width:80%;
+.speech-to-text-container {
+  display: flex;
+  margin: auto;
+  width: 100vw;
+  padding: 3em;
 }
 
-#title{
+.speech-row-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#speech-log {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+}
+
+#speech-log-text{
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+
+#column-buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
 }

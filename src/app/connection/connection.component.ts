@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ConnectionComponent {
 
+  public selectedDevice: any;
+  public devices: any[];
+
+  constructor(){
+    this.devices = [{name:"Ahmad's Iphone", mac_address: "34ddf:dfs3312:fds"},{name:"John's Laptop", mac_address:"34fD34:343:343"}]
+  }
 }

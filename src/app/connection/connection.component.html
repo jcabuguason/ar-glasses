@@ -2,23 +2,21 @@
 
   <h2>Paired Devices</h2>
 
-  <h2>Properties</h2>
-  <p-divider align="center">
-    <i class="pi pi-cog"></i>
-    Connection Settings
-  </p-divider>
+  <p-listbox [options]="this.devices" [(ngModel)]="this.selectedDevice" optionLabel="name"></p-listbox>
+  
+  <h2>Connection Properties</h2>
 
-
-
-  <p-skeleton styleClass="mb-2" borderRadius="16px"></p-skeleton>
-  <br>
-  <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-  <br>
-
-  <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-  <br>
-  <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-  <br>
-  <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
+  <div>
+    <p-skeleton styleClass="mb-2" borderRadius="16px"></p-skeleton>
+    <br>
+    <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+    <br>
+  
+    <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+    <br>
+    <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+    <br>
+    <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
+  </div>
 
 </div>

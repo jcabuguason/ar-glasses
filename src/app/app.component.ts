@@ -18,23 +18,6 @@ export class AppComponent implements OnInit {
         label: 'Device Hardware Settings',
         icon:'pi pi-fw pi-cog',
         routerLink: '/noise-sensitivity',
-        // items: [
-        //   {
-        //     label: 'Noise Sensitivity',
-        //     icon: 'pi pi-fw pi-volume-up',
-        //     url: '/noise-sensitivity#noise-sensitivity-slider'
-        //   },
-        //   {
-        //     label: 'Vibration Sensitivity',
-        //     icon: 'pi pi-fw pi-angle-double-up',
-        //     url: '/noise-sensitivity#vibrationSensitivity'
-        //   },
-        //   {
-        //     label: 'Vibration Sensitivity',
-        //     icon: 'pi pi-fw pi-angle-double-up',
-        //     url: '/noise-sensitivity#fontSettings'
-        //   },
-        // ]
       },
       {
         label: 'Connection',
