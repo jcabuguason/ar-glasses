@@ -1,9 +1,15 @@
-<div class="settings">
+<div class="settings" >
+
+  <div
+  pAnimate
+  style="opacity:0"
+  enterClass="fadein"
+  class="animation-duration-700 animation-ease-in animation-fill-forwards">
 
   <h2>Paired Devices</h2>
 
   <p-listbox [options]="this.devices" [(ngModel)]="this.selectedDevice" optionLabel="name"></p-listbox>
-  
+
   <h2>Connection Properties</h2>
 
   <div>
@@ -11,12 +17,14 @@
     <br>
     <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
     <br>
-  
+
     <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
     <br>
     <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
     <br>
     <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
   </div>
+  </div>
+
 
 </div>

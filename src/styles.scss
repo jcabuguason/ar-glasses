@@ -27,6 +27,12 @@ html {
   }
 }
 
+.login-container{
+  p-card{
+    background: rgba(255,255,255,0.1) !important;
+  }
+}
+
 .p-component .p-slider {
   background: lightblue;
 }
@@ -38,13 +44,20 @@ html {
   }
 }
 
+.customfadein{
+  animation:customfadein 5s;
+}
+
 // Add customization to animatinos
 @keyframes customfadein {
   0% {
-    opacity: 0;
+    opacity: 0.7;
+  }
+  50%{
+    opacity: 1;
   }
   100% {
-    display: initial;
-    opacity: 1;
+    // display: initial;
+    opacity: 0.7;
   }
 }

@@ -7,20 +7,16 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div class="login-container" *ngIf="!connected">
+  <div class="login-container  gradientanimation" *ngIf="!connected">
     <!-- <img src="/src/assets/glasses-solid.svg" style="height: 200px; width:200px; width:auto;" alt=""> -->
 
-    <h1
-    pAnimate
-    enterClass="fadein"
-    class="animation-duration-1000 animation-ease-in"
+    <h1  style="color:whitesmoke"  class="customfadein animation-ease-in-out animation-iteration-infinite"
     >NMK06</h1>
     <i
     pAnimate
-    enterClass="fadein"
-    class="pi pi-prime animation-duration-1000 animation-ease-in animation-fill-forwards"
+    class="customfadein pi pi-prime animation-ease-in-out animation-iteration-infinite"
 
-      style="font-size: 10rem; color: #4545d4; margin-bottom: 20px"
+      style="font-size: 10rem; color: #ffffff; margin-bottom: 20px"
     ></i>
 
     <p-card>
