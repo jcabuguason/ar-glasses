@@ -11,21 +11,6 @@ var app = express();
 // exposed APIs
 app.use(bodyParser.json());
 
-const spawn = require('child_process').spawn;
-const ls = spawn('python', ['script.py', 'arg1', 'arg2']);
-
-ls.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
-
-ls.stderr.on('data', (data) => {
-  console.log(`stderr: ${data}`);
-});
-
-ls.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-});
-
 // Create link to Angular build directory
 // The `ng build` command will save the result
 // under the `dist` folder.
@@ -45,3 +30,18 @@ var server = app.listen(process.env.PORT || 8080, function () {
 app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
+
+// const spawn = require('child_process').spawn;
+// const ls = spawn('python', ['script.py', 'arg1', 'arg2']);
+
+// ls.stdout.on('data', (data) => {
+//   console.log(`stdout: ${data}`);
+// });
+
+// ls.stderr.on('data', (data) => {
+//   console.log(`stderr: ${data}`);
+// });
+
+// ls.on('close', (code) => {
+//   console.log(`child process exited with code ${code}`);
+// });

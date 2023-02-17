@@ -1,57 +1,69 @@
-<div class="option">
+<div class="option" >
   <p-card
     id="noiseSensitivity"
     header="Noise Sensitivity"
     styleClass="p-card-shadow"
   >
-
     <div class="card-container">
-      <label for="noise-sensitivity-slider">Calibrate how sensitive the mic is when picking up noises</label>
+      <label for="noise-sensitivity-slider"
+        >Calibrate how sensitive the mic is when picking up noises</label
+      >
       <div class="card-slider">
-        <p-slider id="noise-sensitivity-slider" [(ngModel)]="this.noiseSensitivity" [step]="10"></p-slider>
+        <p-slider
+          id="noise-sensitivity-slider"
+          [(ngModel)]="this.noiseSensitivity"
+          [step]="10"
+        ></p-slider>
         <div class="option-value">{{ this.noiseSensitivity }}%</div>
       </div>
     </div>
-    <ng-template pTemplate="footer">
-    </ng-template>
+    <ng-template pTemplate="footer"> </ng-template>
   </p-card>
 
-  <br>
+  <br />
 
   <p-card
-  id="vibrationSensitivity"
-  header="Vibration Sensitivity"
-  styleClass="p-card-shadow"
-  style="margin-top:100px;"
->
-  <div class="card-container">
-    <label for="vibration-sensitivity-slider">Calibrate the vibration intensity of the AR glasses</label>
-    <div class="card-slider">
-      <p-slider id="vibration-sensitivity-slider" [(ngModel)]="this.vibrationSensitivity" [step]="10"></p-slider>
-      <div class="option-value">{{ this.vibrationSensitivity }}%</div>
-    </div>
-  </div>
-
-  <ng-template pTemplate="footer">
-  </ng-template>
-</p-card>
-
-<br>
-
-<p-card
-  id="fontSettings"
-  header="Font Settings"
-  styleClass="p-card-shadow"
+    id="vibrationSensitivity"
+    header="Vibration Sensitivity"
+    styleClass="p-card-shadow"
   >
-
-  <div class="card-container">
-    <label for="font-settings-value">Resize the font settings on the glass display</label>
-    <div class="card-slider">
-      <p-slider id="font-settings-value" [(ngModel)]="this.fontSize" [step]="10"></p-slider>
-      <div class="option-value">{{ this.fontSize }}%</div>
+    <div class="card-container">
+      <label for="vibration-sensitivity-slider"
+        >Calibrate the vibration intensity of the AR glasses</label
+      >
+      <div class="card-slider">
+        <p-slider
+          id="vibration-sensitivity-slider"
+          [(ngModel)]="this.vibrationSensitivity"
+          [step]="10"
+        ></p-slider>
+        <div class="option-value">{{ this.vibrationSensitivity }}%</div>
+      </div>
     </div>
-  </div>
-  <ng-template pTemplate="footer">
-  </ng-template>
-</p-card>
+
+    <ng-template pTemplate="footer"> </ng-template>
+  </p-card>
+
+  <br />
+
+  <p-card
+    id="fontSettings"
+    header="Font Settings"
+    styleClass="p-card-shadow"
+  >
+    <div class="card-container">
+      <label for="font-settings-value"
+        >Resize the font settings on the glass display</label
+      >
+      <div class="card-slider">
+        <p-slider
+          id="font-settings-value"
+          [(ngModel)]="this.fontSize"
+          [step]="10"
+        ></p-slider>
+        <div class="option-value">{{ this.fontSize }}%</div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer"> </ng-template>
+  </p-card>
 </div>

@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
       },
       {
         label: 'Text to Speech',
-        icon: 'pi pi-fw pi-book',
+        icon: 'pi pi-fw pi-microphone',
         routerLink: '/speech',
       },
     ];

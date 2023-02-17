@@ -22,6 +22,9 @@ html {
       color: rgb(77, 77, 77);
     }
   }
+
+  p-card {
+  }
 }
 
 .p-component .p-slider {
@@ -32,5 +35,16 @@ html {
   .p-button {
     min-width: 10em;
     text-justify: auto;
+  }
+}
+
+// Add customization to animatinos
+@keyframes customfadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    display: initial;
+    opacity: 1;
   }
 }
