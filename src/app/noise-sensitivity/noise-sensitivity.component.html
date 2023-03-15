@@ -64,6 +64,14 @@
             [step]="10"
           ></p-slider>
           <div class="option-value">{{ this.fontSize }}%</div>
+
+          <p-inputNumber
+          id="font-settings-value"
+          [(ngModel)]="this.fontSize"
+          [step]="1"
+          [showButtons]="true" buttonLayout="horizontal"
+          suffix="px"
+        ></p-inputNumber>
         </div>
       </div>
       <ng-template pTemplate="footer"> </ng-template>

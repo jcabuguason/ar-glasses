@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./pybluez2",
+        "./pybluez2"
+    ]
+}

@@ -19,6 +19,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ import { ConfirmationService } from 'primeng/api';
     MessagesModule,
     MessageModule,
     HttpClientModule,
+    InputNumberModule,
     ConfirmPopupModule,
   ],
   providers: [DialogService, ConfirmationService],
