@@ -12,9 +12,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ListboxModule } from 'primeng/listbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {AnimateModule} from 'primeng/animate';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { AnimateModule } from 'primeng/animate';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +26,7 @@ import { NoiseSensitivityComponent } from './noise-sensitivity/noise-sensitivity
 import { VibrationSensitivityComponent } from './vibration-sensitivity/vibration-sensitivity.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { SpeechComponent } from './speech/speech.component';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -50,8 +54,9 @@ import { SpeechComponent } from './speech/speech.component';
     MessagesModule,
     MessageModule,
     HttpClientModule,
+    ConfirmPopupModule,
   ],
-  providers: [],
+  providers: [DialogService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

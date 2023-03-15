@@ -66,6 +66,6 @@ export class SpeechComponent {
   }
 
   clearText(){
-
+      this.messageLog = "";
   }
 }

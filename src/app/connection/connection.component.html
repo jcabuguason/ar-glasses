@@ -8,7 +8,7 @@
 
   <h2>Paired Devices</h2>
 
-  <p-listbox [options]="this.devices" [(ngModel)]="this.selectedDevice" optionLabel="name"></p-listbox>
+  <p-listbox [options]="this.devices" (onChange)="confirm($event)" [(ngModel)]="this.selectedDevice" optionLabel="name"></p-listbox>
 
   <h2>Connection Properties</h2>
 
