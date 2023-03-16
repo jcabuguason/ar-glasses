@@ -7,9 +7,9 @@ $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
 
 import socket
 import bluetooth
-
+import ipaddress
 server_sock = bluetooth.BluetoothSocket()
-server_sock.bind(("94:08:53:74:cd:20", bluetooth.PORT_ANY))
+server_sock.bind(('28:16:a8:6e:60:7e', 1))
 server_sock.listen(1)
 
 port = server_sock.getsockname()[1]
@@ -17,11 +17,11 @@ port = server_sock.getsockname()[1]
 print(port)
 uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 
-# bluetooth.advertise_service(server_sock, "SampleServer", service_id=uuid,
-#                             service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
-#                             profiles=[bluetooth.SERIAL_PORT_PROFILE],
-#                             protocols=[bluetooth.OBEX_UUID]
-#                             )
+bluetooth.advertise_service(server_sock, "SampleServer", service_id=uuid,
+                            service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
+                            profiles=[bluetooth.SERIAL_PORT_PROFILE],
+                            protocols=[bluetooth.OBEX_UUID]
+                            )
 
 print("Waiting for connection on RFCOMM channel", port)
 

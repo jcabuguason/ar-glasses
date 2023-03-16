@@ -1,6 +1,18 @@
 {
     "python.analysis.extraPaths": [
         "./pybluez2",
-        "./pybluez2"
-    ]
+        "./pybluez2",
+        "./pybluez2/build/lib.win-amd64-3.11",
+        "./lib.win-amd64-3.11",
+        "./lib.win-amd64-3.11",
+        "C:/Python311/Lib/site-packages",
+        "C:/Users/John Cabuguason/ar-glasses/src/build/lib.win-amd64-3.11/bluetooth"
+
+    ],
+    "files.associations": {
+        "ws2bth.h": "c",
+        "bluetoothapis.h": "c",
+        "winsock2.h": "c",
+        "initguid.h": "c"
+    }
 }

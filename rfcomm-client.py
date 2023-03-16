@@ -22,23 +22,23 @@ else:
 
 # search for the SampleServer service
 uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+print(uuid)
+service_matches = bluetooth.find_service(uuid=uuid, address=addr)
 
-# service_matches = bluetooth.find_service(uuid=uuid, address=addr)
-# print(service_matches)
-# if len(service_matches) == 0:
-#     print("Couldn't find the SampleServer service.")
-#     sys.exit(0)
+if len(service_matches) == 0:
+    print("Couldn't find the SampleServer service.")
+    sys.exit(0)
 
-# first_match = service_matches[0]
-# port = first_match["port"]
-# name = first_match["name"]
-# host = first_match["host"]
-name = "SurfaceNinja"
-host = "localhost"
+first_match = service_matches[0]
+port = first_match["port"]
+name = first_match["name"]
+host = first_match["host"]
+# name = "SurfaceNinja"
+# host = "localhost"
 print("Connecting to \"{}\" on {}".format(name, host))
 
 # Create the client socket
-sock = bluetooth.BluetoothSocket()
+sock = bluetooth.BluetoothSocket(3)
 sock.connect(("192.168.2.44", 0))
 
 print("Connected. Type something...")
