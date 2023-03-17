@@ -29,6 +29,9 @@ import { ConnectionComponent } from './connection/connection.component';
 import { SpeechComponent } from './speech/speech.component';
 import { ConfirmationService } from 'primeng/api';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +60,11 @@ import { ConfirmationService } from 'primeng/api';
     HttpClientModule,
     InputNumberModule,
     ConfirmPopupModule,
+    StoreModule.forRoot({inputs: i, connection: connectionReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: false, // Restrict extension to log-only mode
+    }),
   ],
   providers: [DialogService, ConfirmationService],
   bootstrap: [AppComponent],

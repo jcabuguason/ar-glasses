@@ -3,6 +3,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { MenuItem, Message } from 'primeng/api';
 import { Messages } from 'primeng/messages';
 import { StatusService } from './status.service';
+import { Store } from '@ngrx/store';
+import { requestConnection } from './store/connection/connection.actions';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  constructor(private statusService: StatusService) {}
+  constructor(private statusService: StatusService, private store: Store) {}
 
   ngOnInit(): void {
     this.items = [
@@ -47,6 +49,11 @@ export class AppComponent implements OnInit {
     this.statusService.getStatus().subscribe((result: any) => {
       console.log(result);
     });
+
+    console.log('dispatching action');
+    this.store.dispatch(requestConnection());
+
+    this.store.subscribe((value)=>console.log(value));
   }
 
   connect() {
