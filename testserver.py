@@ -4,7 +4,6 @@ import bluetooth
 server_socket = bluetooth.BluetoothSocket()
 
 print(server_socket)
-
 port = 4
 host = bluetooth.read_local_bdaddr()[0]
 

@@ -12,6 +12,8 @@ export class StatusService {
 
   // Get the status
   getStatus(): Observable<void | any> {
+
+
     return this.http.get<any>(this.statusUrl);
   }
 
