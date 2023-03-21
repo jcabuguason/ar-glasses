@@ -1,8 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
-export const requestConnection = createAction('[Connection] Update');
+export const requestConnection = createAction('[Connection Request] Init');
 
-export const updateConnection = createAction(
-  '[Connection] Initialize',
+export const successfulConnection = createAction(
+  '[Connection Request] Success',
   props<{ connection: {} }>()
 );
+
+export const failedConnection = createAction('[Connection Request] Error');

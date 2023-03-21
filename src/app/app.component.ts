@@ -3,8 +3,14 @@ import { MenubarModule } from 'primeng/menubar';
 import { MenuItem, Message } from 'primeng/api';
 import { Messages } from 'primeng/messages';
 import { StatusService } from './status.service';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { requestConnection } from './store/connection/connection.actions';
+import { Router } from '@angular/router';
+import {
+  AppState,
+  selectIsConnectionEstablished,
+  selectIsRequestingConnection,
+} from './store/app.state';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +21,8 @@ export class AppComponent implements OnInit {
   title = 'ar-glasses';
   items: MenuItem[] = [];
   connected = false;
+  requestingConnection = false;
+
   public messages: Message[] = [
     {
       severity: 'info',
@@ -25,7 +33,11 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  constructor(private statusService: StatusService, private store: Store) {}
+  constructor(
+    private statusService: StatusService,
+    private store: Store<AppState>,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.items = [
@@ -50,11 +62,27 @@ export class AppComponent implements OnInit {
       console.log(result);
     });
 
-    console.log('dispatching action');
-    this.store.dispatch(requestConnection());
+    this.store
+      .pipe(select(selectIsRequestingConnection))
+      .subscribe((isRequestingConnection) => {
+        this.requestingConnection = isRequestingConnection;
+      });
+
+    this.store
+      .pipe(select(selectIsConnectionEstablished))
+      .subscribe((isConnectionEstablished) => {
+        if(isConnectionEstablished){
+          this.connected = true;
+        }
+      });
   }
 
   connect() {
-    this.connected = true;
+    // this.connected = true;
+
+    console.log('dispatching action');
+    this.store.dispatch(requestConnection());
+
+    // this.router.navigate(['settings'])
   }
 }

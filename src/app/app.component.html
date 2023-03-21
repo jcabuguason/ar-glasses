@@ -41,7 +41,7 @@
           </div>
           <h3>Waiting to connect...</h3>
         </div>
-        <p-button (onClick)="this.connect()">Connect</p-button>
+        <p-button [loading]="this.requestingConnection" label="Connect" (onClick)="this.connect()"></p-button>
       </div>
     </p-card>
   </div>

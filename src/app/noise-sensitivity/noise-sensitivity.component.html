@@ -20,7 +20,7 @@
             formControlName="noiseSensitivity"
             id="noise-sensitivity-slider"
             [step]="10"
-            (onChange)="this.updateInputValue(1,noiseSensitivity.value)"
+            (onSlideEnd)="this.updateInputValue(0,noiseSensitivity.value)"
           ></p-slider>
           <div class="option-value">{{ noiseSensitivity.value }}%</div>
         </div>
@@ -46,6 +46,7 @@
             id="vibration-sensitivity-slider"
             formControlName="vibrationSensitivity"
             [step]="10"
+            (onSlideEnd)="this.updateInputValue(1,vibrationSensitivity.value)"
           ></p-slider>
           <div class="option-value">{{ vibrationSensitivity.value }}%</div>
         </div>
@@ -71,11 +72,13 @@
           <div class="option-value">{{ fontSize.value }}%</div> -->
 
           <p-inputNumber
+          #fontSize
           id="font-settings-value"
           formControlName="fontSize"
           [step]="1"
           [showButtons]="true" buttonLayout="horizontal"
           suffix="px"
+          (ngModelChange)="this.updateInputValue(2,fontSize.value)"
 
         ></p-inputNumber>
         </div>

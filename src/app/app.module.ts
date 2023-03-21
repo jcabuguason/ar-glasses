@@ -33,6 +33,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { connectionReducer } from './store/connection/connection.reducer';
 import { inputReducer } from './store/input/input.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ConnectionEffects } from './store/connection/connection.effects';
+import { InputEffects } from './store/input/input.effects';
+import { STTEffects } from './store/speech-to-text/stt.effects';
+import { sttReducer } from './store/speech-to-text/stt.reducer';
 
 @NgModule({
   declarations: [
@@ -63,11 +68,12 @@ import { inputReducer } from './store/input/input.reducer';
     HttpClientModule,
     InputNumberModule,
     ConfirmPopupModule,
-    StoreModule.forRoot({input: inputReducer, connection: connectionReducer}),
+    StoreModule.forRoot({input: inputReducer, connection: connectionReducer, stt: sttReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: false, // Restrict extension to log-only mode
-    })
+    }),
+    EffectsModule.forRoot(ConnectionEffects,InputEffects, STTEffects),
   ],
   providers: [DialogService, ConfirmationService],
   bootstrap: [AppComponent],
