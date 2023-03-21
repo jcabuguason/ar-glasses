@@ -1,4 +1,4 @@
-<div class="option">
+<div class="option" [formGroup]="this.inputGroup">
   <div
     pAnimate
     style="opacity:0"
@@ -16,11 +16,13 @@
         >
         <div class="card-slider">
           <p-slider
+            #noiseSensitivity
+            formControlName="noiseSensitivity"
             id="noise-sensitivity-slider"
-            [(ngModel)]="this.noiseSensitivity"
             [step]="10"
+            (onChange)="this.updateInputValue(1,noiseSensitivity.value)"
           ></p-slider>
-          <div class="option-value">{{ this.noiseSensitivity }}%</div>
+          <div class="option-value">{{ noiseSensitivity.value }}%</div>
         </div>
       </div>
       <ng-template pTemplate="footer"> </ng-template>
@@ -38,12 +40,14 @@
           >Calibrate the vibration intensity of the AR glasses</label
         >
         <div class="card-slider">
+
           <p-slider
+            #vibrationSensitivity
             id="vibration-sensitivity-slider"
-            [(ngModel)]="this.vibrationSensitivity"
+            formControlName="vibrationSensitivity"
             [step]="10"
           ></p-slider>
-          <div class="option-value">{{ this.vibrationSensitivity }}%</div>
+          <div class="option-value">{{ vibrationSensitivity.value }}%</div>
         </div>
       </div>
 
@@ -58,19 +62,21 @@
           >Resize the font settings on the glass display</label
         >
         <div class="card-slider">
-          <p-slider
+          <!-- <p-slider
             id="font-settings-value"
-            [(ngModel)]="this.fontSize"
+            #fontSize
+            formControlName="fontSize"
             [step]="10"
           ></p-slider>
-          <div class="option-value">{{ this.fontSize }}%</div>
+          <div class="option-value">{{ fontSize.value }}%</div> -->
 
           <p-inputNumber
           id="font-settings-value"
-          [(ngModel)]="this.fontSize"
+          formControlName="fontSize"
           [step]="1"
           [showButtons]="true" buttonLayout="horizontal"
           suffix="px"
+
         ></p-inputNumber>
         </div>
       </div>

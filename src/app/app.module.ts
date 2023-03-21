@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -31,6 +31,8 @@ import { ConfirmationService } from 'primeng/api';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { connectionReducer } from './store/connection/connection.reducer';
+import { inputReducer } from './store/input/input.reducer';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     FormsModule,
     BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AnimateModule,
     AppRoutingModule,
@@ -60,11 +63,11 @@ import { StoreModule } from '@ngrx/store';
     HttpClientModule,
     InputNumberModule,
     ConfirmPopupModule,
-    StoreModule.forRoot({inputs: i, connection: connectionReducer}),
+    StoreModule.forRoot({input: inputReducer, connection: connectionReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: false, // Restrict extension to log-only mode
-    }),
+    })
   ],
   providers: [DialogService, ConfirmationService],
   bootstrap: [AppComponent],

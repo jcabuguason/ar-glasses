@@ -52,8 +52,6 @@ export class AppComponent implements OnInit {
 
     console.log('dispatching action');
     this.store.dispatch(requestConnection());
-
-    this.store.subscribe((value)=>console.log(value));
   }
 
   connect() {
