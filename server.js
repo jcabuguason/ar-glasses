@@ -23,15 +23,25 @@ var server = app.listen(process.env.PORT || 8080, function () {
     console.log("App now running on port", port);
 });
 
+const spawn = require('child_process').spawn;
+
 /*  "/api/status"
  *   GET: Get server status
  *   PS: it's just an example, not mandatory
  */
 app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
-});
 
-// const spawn = require('child_process').spawn;
+    const python = spawn('python', ['testserver.py']);
+    // collect data from script
+    console.log('getting python script')
+    python.stdout.on('data', function (data) {
+    console.log('Pipe data from python script ...');
+    dataToSend = data.toString();
+    console.log(dataToSend)
+ });
+}); 
+
 // const ls = spawn('python', ['script.py', 'arg1', 'arg2']);
 
 // ls.stdout.on('data', (data) => {

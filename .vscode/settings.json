@@ -6,8 +6,8 @@
         "./lib.win-amd64-3.11",
         "./lib.win-amd64-3.11",
         "C:/Python311/Lib/site-packages",
-        "C:/Users/John Cabuguason/ar-glasses/src/build/lib.win-amd64-3.11/bluetooth"
-
+        "C:/Users/John Cabuguason/ar-glasses/src/build/lib.win-amd64-3.11/bluetooth",
+        "./src/build/lib.win-amd64-3.11"
     ],
     "files.associations": {
         "ws2bth.h": "c",

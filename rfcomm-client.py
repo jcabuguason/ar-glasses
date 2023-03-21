@@ -10,7 +10,6 @@ import sys
 
 import bluetooth
 
-
 addr = "localhost"
 
 if len(sys.argv) < 2:
