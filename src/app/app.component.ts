@@ -11,6 +11,9 @@ import {
   selectIsConnectionEstablished,
   selectIsRequestingConnection,
 } from './store/app.state';
+import { HttpClient } from '@angular/common/http';
+import { take, tap } from 'rxjs';
+import { StatusURL } from './status/status-url.enum';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +39,8 @@ export class AppComponent implements OnInit {
   constructor(
     private statusService: StatusService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -58,9 +62,12 @@ export class AppComponent implements OnInit {
       },
     ];
 
-    this.statusService.getStatus().subscribe((result: any) => {
-      console.log(result);
-    });
+    
+    // setInterval(()=>{
+    //   this.statusService.getStatus(StatusURL.Connection).pipe(take(1)).subscribe((result: any) => {
+    //     console.log("Connection:" + result.value);
+    //   });  
+    // },1000)
 
     this.store
       .pipe(select(selectIsRequestingConnection))
@@ -71,18 +78,17 @@ export class AppComponent implements OnInit {
     this.store
       .pipe(select(selectIsConnectionEstablished))
       .subscribe((isConnectionEstablished) => {
-        if(isConnectionEstablished){
+        if (isConnectionEstablished) {
           this.connected = true;
+          this.router.navigate(['settings']);
         }
       });
   }
 
   connect() {
-    // this.connected = true;
 
-    console.log('dispatching action');
+    console.log('dispatching connection request');
+
     this.store.dispatch(requestConnection());
-
-    // this.router.navigate(['settings'])
   }
 }

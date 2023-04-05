@@ -1,4 +1,5 @@
 
+import time
 import bluetooth
 
 server_socket = bluetooth.BluetoothSocket()
@@ -10,7 +11,7 @@ host = bluetooth.read_local_bdaddr()[0]
 print(host)
 
 server_socket.bind((host, port))
-server_socket.listen(1)
+server_socket.listen(5)
 
 print("Waiting for connection on RFCOMM channel", port)
 
@@ -22,12 +23,16 @@ while True:
 
     # if speech to text data, add speech to text data header
 
+    response = "connected to me!"
+    client_socket.send(response.encode('utf-8'))
 
+    time.sleep(1)
 
     data = client_socket.recv(1024)
-    if not data:
-        break
-    print("Received:", data)
+
+    if data:
+        print("Received:", data.decode())
+        data = None
 
 client_socket.close()
 server_socket.close()

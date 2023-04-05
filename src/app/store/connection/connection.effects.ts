@@ -9,16 +9,21 @@ import {
   requestConnection,
   successfulConnection,
 } from './connection.actions';
+import { StatusService } from 'src/app/status.service';
+import { StatusURL } from 'src/app/status/status-url.enum';
 
 @Injectable()
 export class ConnectionEffects {
   requestConnection = createEffect(() =>
     this.actions.pipe(
       ofType(requestConnection),
-      switchMap(() => this.connectionService.connectToGlasses()),
-      delay(5000),
-      map(() => {
-        return successfulConnection({ connection: '' });
+      switchMap(() => this.statusService.sendStatus(StatusURL.Connection,true)),
+      delay(2000),
+      map((value) => {
+        if(value){
+          return successfulConnection({ connection: '' });
+        }
+        return failedConnection();
       }),
       catchError(() => of(failedConnection()))
     )
@@ -26,6 +31,6 @@ export class ConnectionEffects {
 
   constructor(
     private actions: Actions,
-    private connectionService: ConnectionService
+    private statusService: StatusService
   ) {}
 }
