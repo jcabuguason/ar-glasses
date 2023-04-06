@@ -1,38 +1,69 @@
 
+import threading
 import time
 import bluetooth
 
-server_socket = bluetooth.BluetoothSocket()
+socketClosed = False
 
-print(server_socket)
-port = 4
-host = bluetooth.read_local_bdaddr()[0]
-
-print(host)
-
-server_socket.bind((host, port))
-server_socket.listen(5)
-
-print("Waiting for connection on RFCOMM channel", port)
-
-client_socket, client_info = server_socket.accept()
-print("Accepted connection from", client_info)
-
-while True:
-    # if sound classification data, add sound classification data header
-
-    # if speech to text data, add speech to text data header
-
-    response = "connected to me!"
-    client_socket.send(response.encode('utf-8'))
+def sendData(sock):
+  global socketClosed
+  while True:
+    if(socketClosed):
+        print('closing socket')
+        break
+    response = input("Send values to the client: ")
+    print(sock.sendall(response.encode('utf-8')))
 
     time.sleep(1)
 
-    data = client_socket.recv(1024)
+def receiveData(sock):
+  global socketClosed
+  while True:
+    if(socketClosed):
+        print('closing socket')
+        break
 
-    if data:
-        print("Received:", data.decode())
-        data = None
+    if (sock.recv(1024).decode() == "close"):
+        print("closing connection")
+        socketClosed = True
+        sock.close()
+        break
 
-client_socket.close()
+
+    time.sleep(1)
+
+while True:
+
+  server_socket = bluetooth.BluetoothSocket()
+
+  print(server_socket)
+  port = 4
+  host = bluetooth.read_local_bdaddr()[0]
+
+  print(host)
+
+  server_socket.bind((host, port))
+
+  server_socket.listen()
+
+  print("Waiting for connection on RFCOMM channel", port)
+
+  client_socket, client_info = server_socket.accept()
+  print("Accepted connection from", client_info)
+
+  send_thread = threading.Thread(target=sendData,args=(client_socket,))
+  receive_thread = threading.Thread(target=receiveData,args=(client_socket,))
+
+  send_thread.start()
+  receive_thread.start()
+  send_thread.join()
+  receive_thread.join()
+
+  # retry = input("Try again? Y/N")
+
+  # if retry != "Y":
+  #   break
+  socketClosed = False
+
+
 server_socket.close()
