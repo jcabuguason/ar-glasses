@@ -50,18 +50,27 @@ def receiveData(sock):
         decodedData: str = data.decode()
         
         value:str = decodedData[1:len(decodedData)]
-        print(value.isdigit())
 
-        if(decodedData.startswith('d')):
-          
-          payload = {"value": 16}
-          headers = {"Content-Type": "application/json"}
-          displayBrightnessPost = requests.post('http://localhost:4200/api/status/brightness',json=payload,headers=headers)
-
+        if(decodedData.startswith('p')):
+          payload = {"value": value == "True"}
+          displayBrightnessPost = requests.put('http://localhost:4200/api/status/processing',json=payload)
+          print(displayBrightnessPost)
+        elif(decodedData.startswith('t')):
+          payload = {"value": value == "True"}
+          displayBrightnessPost = requests.put('http://localhost:4200/api/status/classification',json=payload)
+        elif(decodedData.startswith('d')):
+          payload = {"value": value}
+          displayBrightnessPost = requests.put('http://localhost:4200/api/status/brightness',json=payload)
+          print(displayBrightnessPost)
+        elif(decodedData.startswith('m')):
+          payload = {"value": value}
+          displayBrightnessPost = requests.put('http://localhost:4200/api/status/bitDepth',json=payload)
           print(displayBrightnessPost)
 
-        print(decodedData.startswith('a'))
-        print("Received: ", data.decode())
+        data = None
+        decodedData = None
+        value = None
+
 
 def sendData(sock):
   global socketClosed
