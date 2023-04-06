@@ -7,4 +7,5 @@ export enum StatusURL {
   ConnectionRequest = '/api/request/connection',
   DisconnectRequest = '/api/request/disconnect',
   AllStatuses = '/api/status',
+  STTMessage = '/api/stt/message',
 }

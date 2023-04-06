@@ -36,7 +36,7 @@ let bitDepth = 30;
 let isConnected = false;
 let isRequestingConnection = false;
 let isRequestingDisconnect = false;
-let message = { message: "", datetime: ""}
+let message = { message: "better late than never", datetime: new Date().toTimeString()}
 
 setInterval(()=>{
     isRequestingDisconnect = false
@@ -192,10 +192,15 @@ app.put("/api/status/bitDepth", function (req, res) {
  *   POST: Update STT Message
  */
 app.put("/api/stt/message", function (req, res) {
-    let data = req.json();
-    let dateTime = new Date();
-    message = {message: data.message, datetime: dateTime.toString()}
-    res.status(200).json({ value: data });
+    let data = req.body.value;
+    console.log(data);
+    text = data.message;
+    datetime = data.datetime;
+
+    message = {message: text, datetime: datetime};
+    
+    console.log(message);
+    res.status(200).json({ value: message });
 }); 
 
     // const python = spawn('python', ['testserver.py']);

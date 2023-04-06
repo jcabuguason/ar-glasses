@@ -21,13 +21,14 @@ import { InputState } from '../store/input/input.selectors';
 })
 export class DataRequestService {
 
-  private formerData: InputState = {
+  private formerData: any = {
     noiseSensitivity: 0,
     vibrationSensitivity: 0,
     fontSize: 0,
     displayBrightness: 0,
     classificationToggle: false,
-    processingToggle: false
+    processingToggle: false,
+    messageLog:[] = [""],
   }
 
   constructor(
@@ -45,7 +46,7 @@ export class DataRequestService {
           )
         )
         .subscribe(([request, inputState, messageLog]) => {
-          console.log(request);
+          // console.log(request);
 
           if (request.brightness != inputState.displayBrightness && request.brightness != this.formerData.displayBrightness) {
 
@@ -90,8 +91,7 @@ export class DataRequestService {
 
           let alreadyExists = false;
 
-          const message: { message: string; datetime: string } =
-            request.message;
+          const message: { message: string; datetime: string } = request.message;
           const formattedMessage = `(${message.datetime}) ${message.message}`;
           // this.store.dispatch(addMessageRequest({message: message.message, datetime: message.datetime}));
 
@@ -102,6 +102,9 @@ export class DataRequestService {
           }
 
           if (!alreadyExists) {
+            console.log('does not exist yet');
+            console.log(message)
+            this.formerData.messageLog?.push(message);
             this.store.dispatch(
               addMessageRequest({
                 message: message.message,
@@ -136,12 +139,10 @@ export class DataRequestService {
     }
   }
 
-  requestInputValues() {}
-
-  requestTextToSpeech() {
-    return of({ message: 'Hello' });
+  requestMessageUpdate(message: any) {
+    this.statusService.sendStatus(StatusURL.STTMessage,message).pipe(take(1)).subscribe()
   }
-
+  // const formattedMessage = `(${message.datetime}) ${message.message}`;
   requestClassification() {
     return of({ classification: 'Lightning' });
   }
