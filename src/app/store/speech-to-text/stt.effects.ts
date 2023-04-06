@@ -12,13 +12,15 @@ export class STTEffects {
   requestInputUpdate = createEffect(() =>
     this.actions.pipe(
       ofType(addMessageRequest),
-      delay(1000),
       switchMap((request) => {
-        this.dataService.requestTextToSpeech()
+        const message = request;
+
+        // const formattedMessage = `(${message.datetime}) ${message.message}`;
+        this.dataService.requestMessageUpdate({message: message.message, datetime: message.datetime});
         return of(request);
       }),
       map((request) => {
-        return addMessageSuccess(request)
+        return addMessageSuccess({message:request.message,datetime:request.datetime})
       }),
     )
   );

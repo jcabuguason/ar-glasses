@@ -1,7 +1,7 @@
 
 import { createReducer, on } from '@ngrx/store';
 import { request } from 'express';
-import { requestConnection, successfulConnection } from './connection.actions';
+import { requestConnection, successfulConnection, successfulDisconnection } from './connection.actions';
 
 
 export interface ConnectionState  {
@@ -27,5 +27,10 @@ export const connectionReducer = createReducer(
     connection: payload,
     connectionEstablished: true,
     isRequestingConnection: false,
-  }))
+  })),
+  on(successfulDisconnection, (state: any) => ({
+    ...state,
+    connection: null,
+    connectionEstablished: false,
+  })),
 );

@@ -42,12 +42,27 @@ export const selectNoiseSensitivity = createSelector(
 
 export const selectVibrationSensitivity = createSelector(
   selectInputFeature,
-  (state: InputState) => state.noiseSensitivity
+  (state: InputState) => state.vibrationSensitivity
 );
 
 export const selectFontSize = createSelector(
   selectInputFeature,
-  (state: InputState) => state.noiseSensitivity
+  (state: InputState) => state.fontSize
+);
+
+export const selectDisplayBrightness = createSelector(
+  selectInputFeature,
+  (state: InputState) => state.displayBrightness
+);
+
+export const selectProcessingToggle = createSelector(
+  selectInputFeature,
+  (state: InputState) => state.processingToggle
+);
+
+export const selectClassificationToggle = createSelector(
+  selectInputFeature,
+  (state: InputState) => state.classificationToggle
 );
 
 export const selectMessageLog = createSelector(

@@ -1,10 +1,5 @@
 <div class="option" [formGroup]="this.inputGroup">
-  <div
-    pAnimate
-    style="opacity:0"
-    enterClass="fadein"
-    class="animation-duration-700 animation-ease-in animation-fill-forwards"
-  >
+  <div >
     <p-card
       id="noiseSensitivity"
       header="Noise Sensitivity"
@@ -12,15 +7,16 @@
     >
       <div class="card-container">
         <label for="noise-sensitivity-slider"
-          >Calibrate how sensitive the mic is when picking up noises</label
+          >Calibrate how sensitive the mic is when picking up noises. This value
+          changes the bit-depth value of the microphone</label
         >
-        <div class="card-slider">
+        <div disabled class="card-slider">
           <p-slider
             #noiseSensitivity
             formControlName="noiseSensitivity"
             id="noise-sensitivity-slider"
             [step]="10"
-            (onSlideEnd)="this.updateInputValue(0,noiseSensitivity.value)"
+            (onSlideEnd)="this.updateInputValue(0, noiseSensitivity.value)"
           ></p-slider>
           <div class="option-value">{{ noiseSensitivity.value }}%</div>
         </div>
@@ -31,8 +27,64 @@
     <br />
 
     <p-card
+      id="displayBrightness"
+      header="Display Brightness"
+      styleClass="p-card-shadow"
+    >
+      <div class="card-container">
+        <label for="font-settings-value"
+          >Change opacity level on OLED Display</label
+        >
+        <div class="card-slider">
+          <p-slider
+            id="display-brightness-value"
+            #displayBrightness
+            formControlName="displayBrightness"
+            (onSlideEnd)="this.updateInputValue(3, displayBrightness.value)"
+            [step]="10"
+          ></p-slider>
+          <div class="option-value">{{ displayBrightness.value }}%</div>
+        </div>
+      </div>
+      <ng-template pTemplate="footer"> </ng-template>
+    </p-card>
+
+    <br />
+
+    <p-card id="fontSettings" header="Font Size (*)" styleClass="p-card-shadow">
+      <div class="card-container">
+        <label for="font-settings-value"
+          >Change font size on OLED Display</label
+        >
+        <div class="card-slider">
+          <!-- <p-slider
+            id="font-settings-value"
+            #fontSize
+            formControlName="fontSize"
+            [step]="10"
+          ></p-slider> -->
+          <!-- <div class="option-value">{{ fontSize.value }}% </div> -->
+
+          <p-inputNumber
+            #fontSize
+            id="font-settings-value"
+            formControlName="fontSize"
+            [step]="1"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            suffix="px"
+            (ngModelChange)="this.updateInputValue(2, fontSize.value)"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <ng-template pTemplate="footer"> </ng-template>
+    </p-card>
+
+    <br />
+
+    <p-card
       id="vibrationSensitivity"
-      header="Vibration Sensitivity"
+      header="Vibration Sensitivity (*)"
       styleClass="p-card-shadow"
     >
       <div class="card-container">
@@ -40,13 +92,12 @@
           >Calibrate the vibration intensity of the AR glasses</label
         >
         <div class="card-slider">
-
           <p-slider
             #vibrationSensitivity
             id="vibration-sensitivity-slider"
             formControlName="vibrationSensitivity"
             [step]="10"
-            (onSlideEnd)="this.updateInputValue(1,vibrationSensitivity.value)"
+            (onSlideEnd)="this.updateInputValue(1, vibrationSensitivity.value)"
           ></p-slider>
           <div class="option-value">{{ vibrationSensitivity.value }}%</div>
         </div>
@@ -57,32 +108,63 @@
 
     <br />
 
-    <p-card id="fontSettings" header="Font Settings" styleClass="p-card-shadow">
+    <p-card
+      id="processingToggle"
+      header="Processing Toggle"
+      styleClass="p-card-shadow"
+    >
       <div class="card-container">
-        <label for="font-settings-value"
-          >Resize the font settings on the glass display</label
+        <label for="processingToggle"
+          >Turn off/on the processing calculations of the glasses
+          entirely</label
         >
         <div class="card-slider">
+          <p-inputSwitch
+            #inputSwitch
+            formControlName="processingToggle"
+          ></p-inputSwitch>
           <!-- <p-slider
-            id="font-settings-value"
-            #fontSize
-            formControlName="fontSize"
-            [step]="10"
-          ></p-slider>
-          <div class="option-value">{{ fontSize.value }}%</div> -->
-
-          <p-inputNumber
-          #fontSize
-          id="font-settings-value"
-          formControlName="fontSize"
-          [step]="1"
-          [showButtons]="true" buttonLayout="horizontal"
-          suffix="px"
-          (ngModelChange)="this.updateInputValue(2,fontSize.value)"
-
-        ></p-inputNumber>
+          #vibrationSensitivity
+          id="vibration-sensitivity-slider"
+          formControlName="vibrationSensitivity"
+          [step]="10"
+          (onSlideEnd)="this.updateInputValue(1,vibrationSensitivity.value)"
+        ></p-slider>
+        <div class="option-value">{{ vibrationSensitivity.value }}%</div> -->
         </div>
       </div>
+
+      <ng-template pTemplate="footer"> </ng-template>
+    </p-card>
+    
+    <br />
+
+    <p-card
+      id="classificationToggle"
+      header="Classification/STT Toggle"
+      styleClass="p-card-shadow"
+    >
+      <div class="card-container">
+        <label for="classificationToggle"
+          >Switch between the different processing abilities of the glasses.
+          Choose between Classification(ON) or Speech to Text(OFF)
+        </label>
+        <div class="card-slider">
+          <p-inputSwitch
+            #inputSwitch
+            formControlName="classificationToggle"
+          ></p-inputSwitch>
+          <!-- <p-slider
+        #vibrationSensitivity
+        id="vibration-sensitivity-slider"
+        formControlName="vibrationSensitivity"
+        [step]="10"
+        (onSlideEnd)="this.updateInputValue(1,vibrationSensitivity.value)"
+      ></p-slider>
+      <div class="option-value">{{ vibrationSensitivity.value }}%</div> -->
+        </div>
+      </div>
+
       <ng-template pTemplate="footer"> </ng-template>
     </p-card>
   </div>

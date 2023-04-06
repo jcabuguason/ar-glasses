@@ -4,7 +4,7 @@ import { MenuItem, Message } from 'primeng/api';
 import { Messages } from 'primeng/messages';
 import { StatusService } from './status.service';
 import { select, Store } from '@ngrx/store';
-import { requestConnection } from './store/connection/connection.actions';
+import { requestConnection, requestDisconnection } from './store/connection/connection.actions';
 import { Router } from '@angular/router';
 import {
   AppState,
@@ -12,7 +12,6 @@ import {
   selectIsRequestingConnection,
 } from './store/app.state';
 import { HttpClient } from '@angular/common/http';
-import { take, tap } from 'rxjs';
 import { StatusURL } from './status/status-url.enum';
 
 @Component({
@@ -62,13 +61,6 @@ export class AppComponent implements OnInit {
       },
     ];
 
-    
-    // setInterval(()=>{
-    //   this.statusService.getStatus(StatusURL.Connection).pipe(take(1)).subscribe((result: any) => {
-    //     console.log("Connection:" + result.value);
-    //   });  
-    // },1000)
-
     this.store
       .pipe(select(selectIsRequestingConnection))
       .subscribe((isRequestingConnection) => {
@@ -82,13 +74,20 @@ export class AppComponent implements OnInit {
           this.connected = true;
           this.router.navigate(['settings']);
         }
+        else{
+          this.connected = false;
+          this.router.navigate(['/']);
+        }
       });
   }
 
+  disconnect() {
+    console.log('dispatching disconnection request');
+    this.store.dispatch(requestDisconnection())
+  }
+
   connect() {
-
     console.log('dispatching connection request');
-
     this.store.dispatch(requestConnection());
   }
 }

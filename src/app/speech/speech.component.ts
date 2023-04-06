@@ -32,12 +32,12 @@ export class SpeechComponent {
 
   private convertMessagesToMessageLog(messages: any[]) {
     this.messageLog = "";
+
     for (let message of messages) {
-      this.messageLog.concat(
-        '\n(' + message.dateTime + ') ' + message.message
+      this.messageLog = this.messageLog.concat(
+        '\n(' + message.datetime + ') ' + message.message
       );
     }
-    console.log(this.messageLog);
   }
 
 

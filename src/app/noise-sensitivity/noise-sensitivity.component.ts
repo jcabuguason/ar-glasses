@@ -3,8 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import {
   AppState,
+  selectClassificationToggle,
+  selectDisplayBrightness,
   selectFontSize,
   selectNoiseSensitivity,
+  selectProcessingToggle,
   selectVibrationSensitivity,
 } from '../store/app.state';
 import { requestInputUpdate } from '../store/input/input.actions';
@@ -24,25 +27,46 @@ export class NoiseSensitivityComponent implements OnInit {
       noiseSensitivity: new FormControl(0),
       vibrationSensitivity: new FormControl(0),
       fontSize: new FormControl(0),
+      displayBrightness: new FormControl(0),
+      processingToggle: new FormControl(false),
+      classificationToggle: new FormControl(false)
    });
+
+   this.inputGroup.controls['vibrationSensitivity'].disable()
+   this.inputGroup.controls['fontSize'].disable()
   }
 
   ngOnInit() {
-    // subscribe to noise sentivity updates
     this.store.pipe(select(selectNoiseSensitivity)).subscribe((value) => {
-      console.log('hello');
-      console.log(value);
-    });
-
-    //
-    this.store.pipe(select(selectVibrationSensitivity)).subscribe((value) => {
       this.inputGroup.controls['noiseSensitivity'].setValue(value)
     });
 
-    // Subscribe to the
+    this.store.pipe(select(selectVibrationSensitivity)).subscribe((value) => {
+      this.inputGroup.controls['vibrationSensitivity'].setValue(value)
+    });
+
     this.store.pipe(select(selectFontSize)).subscribe((value) => {
-      console.log('hello');
-      console.log(value);
+      this.inputGroup.controls['fontSize'].setValue(value)
+    });
+
+    this.store.pipe(select(selectDisplayBrightness)).subscribe((value) => {
+      this.inputGroup.controls['displayBrightness'].setValue(value)
+    });
+
+    this.store.pipe(select(selectProcessingToggle)).subscribe((value) => {
+      this.inputGroup.controls['processingToggle'].setValue(value)
+    });
+
+    this.store.pipe(select(selectClassificationToggle)).subscribe((value) => {
+      this.inputGroup.controls['classificationToggle'].setValue(value)
+    });
+
+    this.inputGroup.controls["classificationToggle"].valueChanges.subscribe((value)=>{
+      this.updateInputValue(4,value);
+    });
+
+    this.inputGroup.controls["processingToggle"].valueChanges.subscribe((value)=>{
+      this.updateInputValue(5,value);
     });
   }
 

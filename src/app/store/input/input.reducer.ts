@@ -8,6 +8,9 @@ export const inputState : InputState = {
   noiseSensitivity : 20,
   vibrationSensitivity: 20,
   fontSize : 10,
+  displayBrightness: 10,
+  classificationToggle: false,
+  processingToggle: false,
 }
 
 
@@ -24,6 +27,12 @@ export const inputReducer = createReducer(
           return {...state,vibrationSensitivity: inputValue}
         case InputType.FontSize:
           return {...state,fontSize: inputValue}
+        case InputType.DisplayBrightness:
+          return {...state,displayBrightness: inputValue}
+        case InputType.ClassificationToggle:
+          return {...state,classificationToggle: inputValue}
+        case InputType.ProcessingToggle:
+          return {...state,processingToggle: inputValue}
       }
 
       return state;
