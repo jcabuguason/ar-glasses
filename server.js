@@ -3,7 +3,7 @@ var rxjs = require("rxjs");
 // Use Express
 var express = require("express");
 // Use body-parser
-var bodyParser = require("body-parser");
+// var bodyParser = require("body-parser");
 
 // Create new instance of the express server
 var app = express();
@@ -11,7 +11,8 @@ var app = express();
 // Define the JSON parser as a default way
 // to consume and produce data through the
 // exposed APIs
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json())
 
 // Create link to Angular build directory
 // The `ng build` command will save the result
@@ -31,14 +32,25 @@ const spawn = require('child_process').spawn;
 let toggleProcessing = false;
 let toggleClassification = false;
 let brightness = 0;
-let bitDepth = 0;
+let bitDepth = 30;
 let isConnected = false;
 let isRequestingConnection = false;
 let isRequestingDisconnect = false;
+let message = { message: "", datetime: ""}
 
 setInterval(()=>{
     isRequestingDisconnect = false
 },5000)
+
+
+/*  "/api/status"
+ *   POST: Get All Statuses
+ */
+app.get("/api/status", function (req, res) {
+    // console.log({ brightness: brightness, bitDepth: bitDepth , message: message, toggleClassification: toggleClassification, toggleProcessing: toggleProcessing});
+    res.send({ brightness: brightness, bitDepth: bitDepth , message: message, toggleClassification: toggleClassification, toggleProcessing: toggleProcessing});
+}); 
+
 
 /*  "/api/status/connection"
  *   GET: Get Connection Status
@@ -80,21 +92,29 @@ app.get("/api/status/classification", function (req, res) {
  *   GET: Get Display Brightness Value
  */
 app.get("/api/status/brightness", function (req, res) {
-    res.send({ brightness: brightness });
+    res.send({ value: brightness });
 }); 
 
 /*  "/api/status/classification"
  *   GET: Get Microphone Bit-depth
  */
 app.get("/api/status/bitDepth", function (req, res) {
-    res.send({ bitDepth: bitDepth });
+    res.send({ value: bitDepth });
 }); 
+
+/*  "/api/status/classification"
+ *   GET: Get Speech to Text Values
+ */
+app.get("/api/stt/message", function (req, res) {
+    res.send(message);
+}); 
+
 
 
 /*  "/api/status"
  *   POST: Update All Statuses
  */
-app.post("/api/status", function (req, res) {
+app.put("/api/status", function (req, res) {
     let data = req.body;
     brightness = data.brightness
     bitDepth = data.bitDepth
@@ -105,7 +125,7 @@ app.post("/api/status", function (req, res) {
 /*  "/api/status/connection"
  *   POST: Update Connection Status
  */
-app.post("/api/status/connection", function (req, res) {
+app.put("/api/status/connection", function (req, res) {
     let data = req.body;
     isConnected = data.value;
     res.status(200).json({ value: isConnected });
@@ -114,7 +134,7 @@ app.post("/api/status/connection", function (req, res) {
 /*  "/api/request/connection"
  *   POST: Update Connection Request Status
  */
-app.post("/api/request/connection", function (req, res) {
+app.put("/api/request/connection", function (req, res) {
     let data = req.body;
     isRequestingConnection = data.value;
     res.status(200).json({ value: isRequestingConnection });
@@ -123,7 +143,7 @@ app.post("/api/request/connection", function (req, res) {
 /*  "/api/request/connection"
  *   POST: Update Disconnect Request Status
  */
-app.post("/api/request/disconnect", function (req, res) {
+app.put("/api/request/disconnect", function (req, res) {
     let data = req.body;
     isRequestingDisconnect = data.value;
     isRequestingConnection = false;
@@ -133,7 +153,7 @@ app.post("/api/request/disconnect", function (req, res) {
 /*  "/api/status"
  *   POST: Update Processing Status
  */
-app.post("/api/status/processing", function (req, res) {
+app.put("/api/status/processing", function (req, res) {
     let data = req.body;
     toggleProcessing = data.value;
     res.status(200).json({ value: toggleProcessing });
@@ -143,7 +163,7 @@ app.post("/api/status/processing", function (req, res) {
 /*  "/api/status/classification"
  *   POST: Update Processing Status
  */
-app.post("/api/status/classification", function (req, res) {
+app.put("/api/status/classification", function (req, res) {
     let data = req.body;
 
     toggleClassification = data.value;
@@ -153,21 +173,29 @@ app.post("/api/status/classification", function (req, res) {
 /*  "/api/status/brightness"
  *   POST: Update Processing Status
  */
-app.post("/api/status/brightness", function (req, res) {
+app.put("/api/status/brightness", function (req, res) {
     let data = req.body;
-
-    brightness = data.brightness;
+    brightness = data.value;
     res.status(200).json({ value: brightness });
 }); 
 
 /*  "/api/status/bit-depth"
- *   POST: Update Processing Status
+ *   PUT: Update Processing Status
  */
-app.post("/api/status/bit-depth", function (req, res) {
+app.put("/api/status/bitDepth", function (req, res) {
     let data = req.body;
+    bitDepth = data.value;
+    res.status(200).json({value: bitDepth});
+}); 
 
-    bitDepth = data.bitDepth;
-    res.status(200).json({ value: bitDepth });
+/*  "/api/stt/message"
+ *   POST: Update STT Message
+ */
+app.put("/api/stt/message", function (req, res) {
+    let data = req.json();
+    let dateTime = new Date();
+    message = {message: data.message, datetime: dateTime.toString()}
+    res.status(200).json({ value: data });
 }); 
 
     // const python = spawn('python', ['testserver.py']);

@@ -17,7 +17,7 @@ export class StatusService {
 
   // Send update status to endpoint
   sendStatus(statusUrl: StatusURL, value: any): Observable<any>{
-    return this.http.post(statusUrl,{value: value});
+    return this.http.put(statusUrl,{value: value});
   }
 
   // Error handling

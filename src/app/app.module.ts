@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { MenubarModule } from 'primeng/menubar';
 import { SliderModule } from 'primeng/slider';
 import { CardModule } from 'primeng/card';
@@ -69,6 +70,7 @@ import { sttReducer } from './store/speech-to-text/stt.reducer';
     InputNumberModule,
     ConfirmPopupModule,
     StoreModule.forRoot({input: inputReducer, connection: connectionReducer, stt: sttReducer}),
+    InputSwitchModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: false, // Restrict extension to log-only mode
