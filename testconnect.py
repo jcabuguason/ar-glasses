@@ -47,7 +47,21 @@ def receiveData(sock):
       data = sock.recv(1024)
 
       if(data):
-        print("Received: ", data)
+        decodedData: str = data.decode()
+        
+        value:str = decodedData[1:len(decodedData)]
+        print(value.isdigit())
+
+        if(decodedData.startswith('d')):
+          
+          payload = {"value": 16}
+          headers = {"Content-Type": "application/json"}
+          displayBrightnessPost = requests.post('http://localhost:4200/api/status/brightness',json=payload,headers=headers)
+
+          print(displayBrightnessPost)
+
+        print(decodedData.startswith('a'))
+        print("Received: ", data.decode())
 
 def sendData(sock):
   global socketClosed

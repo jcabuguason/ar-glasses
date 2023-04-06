@@ -174,6 +174,7 @@ app.put("/api/status/classification", function (req, res) {
  *   POST: Update Processing Status
  */
 app.put("/api/status/brightness", function (req, res) {
+    console.log('in brightenss update')
     let data = req.body;
     brightness = data.value;
     res.status(200).json({ value: brightness });
