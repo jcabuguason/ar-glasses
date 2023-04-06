@@ -33,17 +33,37 @@ let toggleClassification = false;
 let brightness = 0;
 let bitDepth = 0;
 let isConnected = false;
+let isRequestingConnection = false;
+let isRequestingDisconnect = false;
 
+setInterval(()=>{
+    isRequestingDisconnect = false
+},5000)
 
-/*  "/api/connection"
+/*  "/api/status/connection"
  *   GET: Get Connection Status
  */
 app.get("/api/status/connection", function (req, res) {
     res.send({ value: isConnected });
 }); 
 
+/*  "/api/request/connection"
+ *   GET: Get Connection Request Status
+ */
+app.get("/api/request/connection", function (req, res) {
+    res.send({ value: isRequestingConnection });
+}); 
+
 /*  "/api/status/processing"
- *   GET: Get Processing Status
+ *   GET: Get Connection Disconnect Request Status
+ */
+app.get("/api/request/disconnect", function (req, res) {
+    res.send({ value: isRequestingDisconnect });
+}); 
+
+
+/*  "/api/status/processing"
+ *   GET: Get Processing Toggle Status
  */
 app.get("/api/status/processing", function (req, res) {
     res.send({ value: toggleProcessing });
@@ -57,27 +77,57 @@ app.get("/api/status/classification", function (req, res) {
 }); 
 
 /*  "/api/status/classification"
- *   GET: Get Processing Status
+ *   GET: Get Display Brightness Value
  */
 app.get("/api/status/brightness", function (req, res) {
     res.send({ brightness: brightness });
 }); 
 
 /*  "/api/status/classification"
- *   GET: Get Processing Status
+ *   GET: Get Microphone Bit-depth
  */
 app.get("/api/status/bitDepth", function (req, res) {
     res.send({ bitDepth: bitDepth });
 }); 
 
 
+/*  "/api/status"
+ *   POST: Update All Statuses
+ */
+app.post("/api/status", function (req, res) {
+    let data = req.body;
+    brightness = data.brightness
+    bitDepth = data.bitDepth
+    res.status(200).json({ value: data });
+}); 
+
+
 /*  "/api/status/connection"
- *   POST: Get Connection Status
+ *   POST: Update Connection Status
  */
 app.post("/api/status/connection", function (req, res) {
     let data = req.body;
     isConnected = data.value;
     res.status(200).json({ value: isConnected });
+}); 
+
+/*  "/api/request/connection"
+ *   POST: Update Connection Request Status
+ */
+app.post("/api/request/connection", function (req, res) {
+    let data = req.body;
+    isRequestingConnection = data.value;
+    res.status(200).json({ value: isRequestingConnection });
+}); 
+
+/*  "/api/request/connection"
+ *   POST: Update Disconnect Request Status
+ */
+app.post("/api/request/disconnect", function (req, res) {
+    let data = req.body;
+    isRequestingDisconnect = data.value;
+    isRequestingConnection = false;
+    res.status(200).json({ value: isRequestingDisconnect });
 }); 
 
 /*  "/api/status"
@@ -119,8 +169,6 @@ app.post("/api/status/bit-depth", function (req, res) {
     bitDepth = data.bitDepth;
     res.status(200).json({ value: bitDepth });
 }); 
-
-
 
     // const python = spawn('python', ['testserver.py']);
     // // collect data from script

@@ -1,25 +1,120 @@
 
+import threading
+from time import sleep
 import bluetooth
+import requests
+
 def connect ():
-  bd_addr = "94:08:53:74:CD:20"
-  port = 4
-  sock = bluetooth.BluetoothSocket()
-  connection = sock.connect((bd_addr, port))
+  # bd_addr = "28:16:A8:6E:60:7F"
+  # port = 4
+  # sock = bluetooth.BluetoothSocket()
 
-  while True:
+  print("Waiting for connection request from frontend")
 
-    print("Please pick one: ")
-    print("a. Toggle processing")
-    print("b. Toggle stt / classification")
-    print("c. Update brightness request")
-    print("d. Update bit-depth request")
-
+  sock = reinitializeConnection()
+  
+  # send_thread = threading.Thread(target=send_data)
+  send_thread = threading.Thread(target=sendData,args=(sock,))
+  receive_thread = threading.Thread(target=receiveData,args=(sock,))
     
+  send_thread.start()
+  receive_thread.start()
 
-    print(bd_addr)
-    message = "hello!"
-    b = message.encode('utf-8')
-    sock.send(b)
+  send_thread.join()
+  receive_thread.join()
+  
   sock.close()
 
-connect()
+def receiveData(sock):
+  global socketClosed
+  while True:
+    sleep(1)
+
+    if socketClosed:
+      print('closing socket')
+      break
+
+    processStatusRequest = requests.get('http://localhost:4200/api/status/processing')
+
+    if not processStatusRequest.ok:
+      print('Error: Cannot find request')
+      break
+      
+    isProcessing = processStatusRequest.json()["value"]
+
+    # If processing, read values from socket
+    if (not isProcessing):
+      data = sock.recv(1024)
+
+      if(data):
+        print("Received: ", data)
+
+def sendData(sock):
+  global socketClosed
+  while True:
+    sleep(1)
+    disconnectStatusRequest = requests.get("http://localhost:4200/api/request/disconnect")
+
+    if not disconnectStatusRequest.ok:
+      print('Error: Cannot find request')
+      break
+      
+    shouldDisconnect = disconnectStatusRequest.json()["value"]
+
+    if(shouldDisconnect):
+      socketClosed = True
+      print('closing connection')
+      sock.sendall("close".encode('utf-8'))
+      sock.close()
+      break
+      
+
+def reinitializeConnection():
+    global socketClosed
+    bd_addr = "28:16:A8:6E:60:7F"
+    port = 4
+    sock = bluetooth.BluetoothSocket()
+
+    while True:
+      request = requests.get('http://localhost:4200/api/request/connection')
+      value = request.json()["value"]
+      print("Connection Requested: ", value)
+      if value == True:
+        print("Got request to connect!")
+        sock.connect((bd_addr, port))
+        break
+
+      sleep(1)
+
+    print("Connected to {}",bd_addr)
+    
+    return sock
+
+
+socketClosed = False
+
+while True:
+
+  connect()
+
+  # retry = input("Retry again? Y/N: ").capitalize()
+
+  # if(retry != "Y" and retry != "Yes"):
+  #   break
+  
+  socketClosed = False
+
+
+
+
+
+
+     # print("a. Toggle processing")
+      # print("b. Toggle stt / classification")
+      # print("c. Update brightness request")
+      # print("d. Update bit-depth request")
+
+      # choice = input("Please pick one:")
+      # message = "hello!"
+      # b = message.encode('utf-8')
+      # sock.send(b)  

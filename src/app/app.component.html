@@ -1,6 +1,6 @@
 
 <p-menubar *ngIf="connected" [model]="items">
-  <p-button icon="pi pi-power-off" label="Disconnect"></p-button>
+  <p-button icon="pi pi-power-off" label="Disconnect" (onClick)="this.disconnect()"></p-button>
 </p-menubar>
 
 <div class="scrollable-container">

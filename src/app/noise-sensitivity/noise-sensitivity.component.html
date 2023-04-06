@@ -12,9 +12,10 @@
     >
       <div class="card-container">
         <label for="noise-sensitivity-slider"
-          >Calibrate how sensitive the mic is when picking up noises</label
+          >Calibrate how sensitive the mic is when picking up noises. This value changes the bit-depth value of the microphone</label
         >
-        <div class="card-slider">
+        <div disabled class="card-slider">
+
           <p-slider
             #noiseSensitivity
             formControlName="noiseSensitivity"
@@ -57,20 +58,20 @@
 
     <br />
 
-    <p-card id="fontSettings" header="Font Settings" styleClass="p-card-shadow">
+    <p-card id="fontSettings" header="Display Brightness" styleClass="p-card-shadow">
       <div class="card-container">
         <label for="font-settings-value"
-          >Resize the font settings on the glass display</label
+          >Change opacity level on OLED Display</label
         >
         <div class="card-slider">
-          <!-- <p-slider
+          <p-slider
             id="font-settings-value"
             #fontSize
             formControlName="fontSize"
             [step]="10"
           ></p-slider>
-          <div class="option-value">{{ fontSize.value }}%</div> -->
-
+          <div class="option-value">{{ fontSize.value }}%</div>
+<!-- 
           <p-inputNumber
           #fontSize
           id="font-settings-value"
@@ -80,7 +81,7 @@
           suffix="px"
           (ngModelChange)="this.updateInputValue(2,fontSize.value)"
 
-        ></p-inputNumber>
+        ></p-inputNumber> -->
         </div>
       </div>
       <ng-template pTemplate="footer"> </ng-template>
