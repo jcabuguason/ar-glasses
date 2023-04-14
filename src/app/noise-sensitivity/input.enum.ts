@@ -4,5 +4,6 @@ export enum InputType {
   FontSize,
   DisplayBrightness,
   ClassificationToggle,
-  ProcessingToggle
+  ProcessingToggle,
+  ClassificationValue,
 }

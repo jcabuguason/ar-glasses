@@ -29,6 +29,8 @@ export class DataRequestService {
     classificationToggle: false,
     processingToggle: false,
     messageLog:[] = [""],
+    classificationValue: "N/A",
+    messageValue : "",
   }
 
   constructor(
@@ -79,8 +81,19 @@ export class DataRequestService {
             );
           }
 
+          if (request.classificationValue != inputState.classificationValue && request.classificationValue != this.formerData.classificationValue) {
+            this.formerData.classificationValue = request.classificationValue;
+            console.log('print classification value');
+            this.store.dispatch(
+              requestInputUpdate({
+                inputID: InputType.ClassificationValue,
+                inputValue: request.classificationValue,
+              })
+            );
+          }
+
           if (request.toggleProcessing != inputState.processingToggle && request.processingToggle != this.formerData.processingToggle) {
-            this.formerData.processingToggle = request.processingToggle;
+            this.formerData.processingToggle = request.toggleProcessing;
             this.store.dispatch(
               requestInputUpdate({
                 inputID: InputType.ProcessingToggle,
@@ -91,24 +104,35 @@ export class DataRequestService {
 
           let alreadyExists = false;
 
-          const message: { message: string; datetime: string } = request.message;
-          const formattedMessage = `(${message.datetime}) ${message.message}`;
+          // console.log('message value')
+          const newMessage: { message: string; datetime: string } = request.message;
+          // console.log(message);
+          // console.log(request.message);
+          const formattedMessage = `(${newMessage.datetime}) ${newMessage.message}`;
+
           // this.store.dispatch(addMessageRequest({message: message.message, datetime: message.datetime}));
 
-          for (const message in messageLog) {
-            if (message.localeCompare(formattedMessage)) {
-              alreadyExists = true;
-            }
-          }
+          // for (const message in messageLog) {
+          //   if (message.localeCompare(formattedMessage)) {
+          //     alreadyExists = true;
+          //   }
+          // }
+
+
+
+          // console.log(formattedMessage);
+          alreadyExists = this.formerData.messageValue.localeCompare(newMessage.message) == 0;
 
           if (!alreadyExists) {
             console.log('does not exist yet');
-            console.log(message)
-            this.formerData.messageLog?.push(message);
+            console.log(formattedMessage)
+            // this.formerData.messageLog.push(newMessage);
+            this.formerData.messageValue = newMessage.message;
+            console.log(this.formerData.messageLog)
             this.store.dispatch(
               addMessageRequest({
-                message: message.message,
-                datetime: message.datetime,
+                message: newMessage.message,
+                datetime: newMessage.datetime,
               })
             );
           }
@@ -117,6 +141,7 @@ export class DataRequestService {
   }
 
   requestInputUpdate(inputID: number, inputValue: number) {
+    console.log('input id: ' + inputID);
     if(inputID == InputType.NoiseSensitivity){
       this.statusService.sendStatus(StatusURL.BitDepth,inputValue).pipe(take(1)).subscribe((data)=>{
         console.log(data);
@@ -134,6 +159,11 @@ export class DataRequestService {
     }
     else if(inputID == InputType.ClassificationToggle){
       this.statusService.sendStatus(StatusURL.ClassificationToggle,inputValue).pipe(take(1)).subscribe((data)=>{
+        console.log(data);
+      });
+    }
+    else if(inputID == InputType.ClassificationValue){
+      this.statusService.sendStatus(StatusURL.ClassificationValue,inputValue).pipe(take(1)).subscribe((data)=>{
         console.log(data);
       });
     }

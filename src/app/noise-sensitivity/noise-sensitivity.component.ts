@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import {
   AppState,
   selectClassificationToggle,
+  selectClassificationValue,
   selectDisplayBrightness,
   selectFontSize,
   selectNoiseSensitivity,
@@ -20,6 +21,7 @@ import { InputType } from './input.enum';
 })
 export class NoiseSensitivityComponent implements OnInit {
   public inputGroup : FormGroup;
+  public classificationValue: string = "N/A";
 
   constructor(private store: Store<AppState>) {
 
@@ -31,6 +33,8 @@ export class NoiseSensitivityComponent implements OnInit {
       processingToggle: new FormControl(false),
       classificationToggle: new FormControl(false)
    });
+
+
 
    this.inputGroup.controls['vibrationSensitivity'].disable()
    this.inputGroup.controls['fontSize'].disable()
@@ -59,6 +63,10 @@ export class NoiseSensitivityComponent implements OnInit {
 
     this.store.pipe(select(selectClassificationToggle)).subscribe((value) => {
       this.inputGroup.controls['classificationToggle'].setValue(value)
+    });
+
+    this.store.pipe(select(selectClassificationValue)).subscribe((value) => {
+      this.classificationValue = value;
     });
 
     this.inputGroup.controls["classificationToggle"].valueChanges.subscribe((value)=>{

@@ -11,6 +11,7 @@ export const inputState : InputState = {
   displayBrightness: 10,
   classificationToggle: false,
   processingToggle: false,
+  classificationValue: "N/A",
 }
 
 
@@ -31,6 +32,8 @@ export const inputReducer = createReducer(
           return {...state,displayBrightness: inputValue}
         case InputType.ClassificationToggle:
           return {...state,classificationToggle: inputValue}
+        case InputType.ClassificationValue:
+          return {...state,classificationValue: inputValue}
         case InputType.ProcessingToggle:
           return {...state,processingToggle: inputValue}
       }

@@ -16,10 +16,13 @@ export class STTEffects {
         const message = request;
 
         // const formattedMessage = `(${message.datetime}) ${message.message}`;
-        this.dataService.requestMessageUpdate({message: message.message, datetime: message.datetime});
-        return of(request);
+        console.log('in effects');
+        // this.dataService.requestMessageUpdate({message: message.message, datetime: message.datetime});
+        return of(message);
       }),
       map((request) => {
+        console.log('adding message')
+        console.log(request)
         return addMessageSuccess({message:request.message,datetime:request.datetime})
       }),
     )

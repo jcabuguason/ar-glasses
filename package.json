@@ -1,12 +1,15 @@
 {
   "name": "ar-glasses",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
+    "build:server": "python testconnect.py",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "ng build --base-href && electron ."
   },
   "private": true,
   "dependencies": {
@@ -23,6 +26,7 @@
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
     "body-parser": "^1.20.1",
+    "concurrently": "^8.0.1",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
     "primeflex": "^3.3.0",
@@ -37,6 +41,7 @@
     "@angular/cli": "~15.1.2",
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
+    "electron": "^24.0.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

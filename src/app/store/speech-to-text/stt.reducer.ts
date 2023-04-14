@@ -13,7 +13,10 @@ export const ttsState: STTState = {
 export const sttReducer = createReducer(
   ttsState,
   on(addMessageSuccess, (state: any, message: any) => {
-    return { ...state, messageLog: [...state.messageLog, message] };
+    const formattedMessage = `(${message.datetime}) ${message.message}`;
+    console.log('in reducer');
+    console.log(formattedMessage);
+    return { ...state, messageLog: [...state.messageLog, formattedMessage] };
   }),
   on(clearLog, (state: any, message: any) => {
     return ttsState;

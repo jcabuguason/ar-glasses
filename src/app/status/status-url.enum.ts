@@ -1,6 +1,7 @@
 export enum StatusURL {
   ProcessingToggle = '/api/status/processing',
   ClassificationToggle = '/api/status/classification',
+  ClassificationValue = '/api/status/classification-value',
   Brightness = '/api/status/brightness',
   BitDepth = '/api/status/bitDepth',
   Connection = '/api/status/connection',

@@ -5,4 +5,5 @@ export interface InputState{
   displayBrightness: number;
   classificationToggle: boolean;
   processingToggle: boolean;
+  classificationValue: string;
 }

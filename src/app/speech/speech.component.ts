@@ -31,15 +31,12 @@ export class SpeechComponent {
   }
 
   private convertMessagesToMessageLog(messages: any[]) {
-    this.messageLog = "";
+    this.messageLog = '';
 
     for (let message of messages) {
-      this.messageLog = this.messageLog.concat(
-        '\n(' + message.datetime + ') ' + message.message
-      );
+      this.messageLog = this.messageLog.concat(message + "\n");
     }
   }
-
 
   startRecording() {
     console.log('start');

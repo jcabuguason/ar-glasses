@@ -65,6 +65,11 @@ export const selectClassificationToggle = createSelector(
   (state: InputState) => state.classificationToggle
 );
 
+export const selectClassificationValue = createSelector(
+  selectInputFeature,
+  (state: InputState) => state.classificationValue
+);
+
 export const selectMessageLog = createSelector(
   selectSTTFeature,
   (state: STTState) => state.messageLog

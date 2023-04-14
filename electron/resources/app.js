@@ -2,11 +2,12 @@ var rxjs = require("rxjs");
 
 // Use Express
 var express = require("express");
-// Use body-parser
-// var bodyParser = require("body-parser");
+const path = require('path');
 
 // Create new instance of the express server
 var app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Define the JSON parser as a default way
 // to consume and produce data through the
@@ -14,11 +15,15 @@ var app = express();
 // app.use(bodyParser.json());
 app.use(express.json())
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 // Create link to Angular build directory
 // The `ng build` command will save the result
 // under the `dist` folder.
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+// var distDir = __dirname + "/dist/";
+// app.use(express.static(distDir));
 
 // Init the server
 var server = app.listen(process.env.PORT || 8080, function () {
@@ -31,7 +36,6 @@ const spawn = require('child_process').spawn;
 // Initial Server Data
 let toggleProcessing = false;
 let toggleClassification = false;
-let classificationValue = "None";
 let brightness = 0;
 let bitDepth = 30;
 let isConnected = false;
@@ -44,12 +48,28 @@ setInterval(()=>{
 },5000)
 
 
+app.on('ready', function() {
+  express();
+  mainWindow = new BrowserWindow({
+    width: 1280,
+    height: 720,
+    autoHideMenuBar: true,
+    useContentSize: true,
+    resizable: false,
+  });
+  mainWindow.loadURL('http://localhost:5000/');
+  mainWindow.focus();
+
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 /*  "/api/status"
  *   POST: Get All Statuses
  */
 app.get("/api/status", function (req, res) {
     // console.log({ brightness: brightness, bitDepth: bitDepth , message: message, toggleClassification: toggleClassification, toggleProcessing: toggleProcessing});
-    res.send({ brightness: brightness, bitDepth: bitDepth , message: message, toggleClassification: toggleClassification, toggleProcessing: toggleProcessing, classificationValue: classificationValue});
+    res.send({ brightness: brightness, bitDepth: bitDepth , message: message, toggleClassification: toggleClassification, toggleProcessing: toggleProcessing});
 });
 
 
@@ -71,8 +91,6 @@ app.get("/api/request/connection", function (req, res) {
  *   GET: Get Connection Disconnect Request Status
  */
 app.get("/api/request/disconnect", function (req, res) {
-    isConnected = false;
-    isRequestingConnection = false;
     res.send({ value: isRequestingDisconnect });
 });
 
@@ -81,7 +99,6 @@ app.get("/api/request/disconnect", function (req, res) {
  *   GET: Get Processing Toggle Status
  */
 app.get("/api/status/processing", function (req, res) {
-    console.log('getting processing toggle');
     res.send({ value: toggleProcessing });
 });
 
@@ -89,23 +106,13 @@ app.get("/api/status/processing", function (req, res) {
  *   GET: Get Classification/STT Toggle Status
  */
 app.get("/api/status/classification", function (req, res) {
-    console.log('updating classification values');
     res.send({ value: toggleClassification });
-});
-
-/*  "/api/status/classification"
- *   GET: Get Classification/STT Toggle Status
- */
-app.get("/api/status/classification-value", function (req, res) {
-  console.log('updating classification values');
-  res.send({ value: classificationValue });
 });
 
 /*  "/api/status/classification"
  *   GET: Get Display Brightness Value
  */
 app.get("/api/status/brightness", function (req, res) {
-    console.log('get brightness values');
     res.send({ value: brightness });
 });
 
@@ -113,7 +120,6 @@ app.get("/api/status/brightness", function (req, res) {
  *   GET: Get Microphone Bit-depth
  */
 app.get("/api/status/bitDepth", function (req, res) {
-    console.log('getting bitdepth values');
     res.send({ value: bitDepth });
 });
 
@@ -121,7 +127,6 @@ app.get("/api/status/bitDepth", function (req, res) {
  *   GET: Get Speech to Text Values
  */
 app.get("/api/stt/message", function (req, res) {
-    console.log('getting stt values');
     res.send(message);
 });
 
@@ -160,7 +165,6 @@ app.put("/api/request/connection", function (req, res) {
  *   POST: Update Disconnect Request Status
  */
 app.put("/api/request/disconnect", function (req, res) {
-    console.log('updating disconnect');
     let data = req.body;
     isRequestingDisconnect = data.value;
     isRequestingConnection = false;
@@ -171,7 +175,6 @@ app.put("/api/request/disconnect", function (req, res) {
  *   POST: Update Processing Status
  */
 app.put("/api/status/processing", function (req, res) {
-    console.log('updating processing toggle');
     let data = req.body;
     toggleProcessing = data.value;
     res.status(200).json({ value: toggleProcessing });
@@ -188,21 +191,11 @@ app.put("/api/status/classification", function (req, res) {
     res.status(200).json({ value: toggleClassification });
 });
 
-/*  "/api/status/classification"
- *   POST: Update Processing Status
- */
-app.put("/api/status/classification-value", function (req, res) {
-  let data = req.body;
-
-  classificationValue = data.value;
-  res.status(200).json({ value: classificationValue });
-});
-
 /*  "/api/status/brightness"
  *   POST: Update Processing Status
  */
 app.put("/api/status/brightness", function (req, res) {
-    console.log('updating brightness');
+    console.log('in brightenss update')
     let data = req.body;
     brightness = data.value;
     res.status(200).json({ value: brightness });
@@ -212,7 +205,6 @@ app.put("/api/status/brightness", function (req, res) {
  *   PUT: Update Processing Status
  */
 app.put("/api/status/bitDepth", function (req, res) {
-    console.log('updating bitdepth');
     let data = req.body;
     bitDepth = data.value;
     res.status(200).json({value: bitDepth});
@@ -222,12 +214,12 @@ app.put("/api/status/bitDepth", function (req, res) {
  *   POST: Update STT Message
  */
 app.put("/api/stt/message", function (req, res) {
-    console.log('updating stt message');
     let data = req.body.value;
     console.log(data);
-    text = data;
-    datetime = new Date();
-    message = {message: text, datetime: new Date().toTimeString()};
+    text = data.message;
+    datetime = data.datetime;
+
+    message = {message: text, datetime: datetime};
 
     console.log(message);
     res.status(200).json({ value: message });
