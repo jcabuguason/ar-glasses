@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
         routerLink: '/noise-sensitivity',
       },
       {
-        label: 'Connection',
+        label: 'Connection Settings',
         icon: 'pi pi-fw pi-wifi',
         routerLink: '/settings',
       },
@@ -58,6 +58,11 @@ export class AppComponent implements OnInit {
         label: 'Text to Speech',
         icon: 'pi pi-fw pi-microphone',
         routerLink: '/speech',
+      },
+      {
+        label: 'Noise Classification',
+        icon: 'pi pi-fw pi-microphone',
+        routerLink: '/classification',
       },
     ];
 

@@ -1,47 +1,33 @@
 <div class="speech-to-text-container">
-  <div
-    pAnimate
-    style="opacity: 0; margin: auto; width: 100%; display: inherit"
-    enterClass="fadein"
-    class="animation-duration-700 animation-ease-in animation-fill-forwards"
-  >  
-    <div class="speech-row-container">
-      <div id="speech-log">
-        <div style="display: flex;justify-content: center; align-items: center; gap: 1em">
-          <i class="pi pi-microphone" style="font-size: 2rem"></i>
-          <h2>Speech Log</h2>
-        </div>
 
-        <div id="speech-log-text">
-          <textarea
-            pInputTextarea
-            [(ngModel)]="messageLog"
-            [rows]="25"
-            [cols]="100"
-            [autoResize]="true"
-            disabled="true"
-          ></textarea>
-        </div>
-      </div>
+  <div id="column-buttons">
+    <p-toggleButton
+      onLabel="Pause"
+      onIcon="pi pi-pause"
+      offIcon="pi pi-stop-circle"
+      offLabel="Record"
+      (onChange)="startRecording()"
+      [(ngModel)]="isRecording"
+    >    </p-toggleButton>
 
-      <div id="column-buttons" pAnimate class="fadein animation-duration-1000 animation-ease-out">
-        <p-button (onClick)="clearText()"> Clear Text</p-button>
-       
-        <!--TODO: Copy data implementation still not processed -->
-        <p-button> Copy Data</p-button>
+    <span class="p-buttonset">
+      <!--TODO: Copy data implementation still not processed -->
+      <button pButton icon="pi pi-copy" label="Copy" (click)="copyText()"></button>
 
-        <p-divider></p-divider>
+      <button pButton icon="pi pi-undo" label="Clear"(click)="clearText()"></button>
+    </span>
 
-        <p-toggleButton
-          onLabel="Pause"
-          onIcon="pi pi-pause"
-          offIcon="pi pi-stop-circle"
-          offLabel="Record"
-          (onChange)="startRecording()"
-          [(ngModel)]="isRecording"
-        >
-        </p-toggleButton>
-      </div>
-    </div>
+  </div>
+
+  <div class="speech-row-container">
+    <textarea
+      id="speech-log"
+      pInputTextarea
+      [(ngModel)]="messageLog"
+      [rows]="20"
+      [cols]="180"
+      [autoResize]="true"
+      disabled="true"
+    ></textarea>
   </div>
 </div>

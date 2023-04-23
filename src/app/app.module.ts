@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from '@angular/cdk/clipboard'
 
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MenubarModule } from 'primeng/menubar';
@@ -25,10 +26,10 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoiseSensitivityComponent } from './noise-sensitivity/noise-sensitivity.component';
-import { VibrationSensitivityComponent } from './vibration-sensitivity/vibration-sensitivity.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { SpeechComponent } from './speech/speech.component';
 import { ConfirmationService } from 'primeng/api';
+import { RippleModule } from 'primeng/ripple';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -39,14 +40,15 @@ import { ConnectionEffects } from './store/connection/connection.effects';
 import { InputEffects } from './store/input/input.effects';
 import { STTEffects } from './store/speech-to-text/stt.effects';
 import { sttReducer } from './store/speech-to-text/stt.reducer';
+import { NoiseClassificationComponent } from './noise-classification/noise-classification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoiseSensitivityComponent,
-    VibrationSensitivityComponent,
     ConnectionComponent,
     SpeechComponent,
+    NoiseClassificationComponent,
   ],
   imports: [
     FormsModule,
@@ -65,6 +67,7 @@ import { sttReducer } from './store/speech-to-text/stt.reducer';
     ListboxModule,
     ToggleButtonModule,
     MessagesModule,
+    RippleModule,
     MessageModule,
     HttpClientModule,
     InputNumberModule,
@@ -76,6 +79,7 @@ import { sttReducer } from './store/speech-to-text/stt.reducer';
       logOnly: false, // Restrict extension to log-only mode
     }),
     EffectsModule.forRoot(ConnectionEffects,InputEffects, STTEffects),
+    ClipboardModule
   ],
   providers: [DialogService, ConfirmationService],
   bootstrap: [AppComponent],

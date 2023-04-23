@@ -7,6 +7,7 @@ import {
   addMessageRequest,
   clearLog,
 } from '../store/speech-to-text/stt.actions';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-speech',
@@ -18,7 +19,7 @@ export class SpeechComponent {
   public messageLog: string = '';
   public isRecording: boolean;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private clipBoard: Clipboard) {
     this.messages = [];
     this.isRecording = false;
   }
@@ -100,7 +101,12 @@ export class SpeechComponent {
     // }, (number += 2000));
   }
 
+  copyText(){
+    this.clipBoard.copy(this.messageLog);
+  }
+
   clearText() {
+    console.log('clearing log')
     this.store.dispatch(clearLog());
     this.messageLog = '';
   }
