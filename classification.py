@@ -3,11 +3,13 @@ import numpy as np
 import librosa
 import warnings
 import threading
+from tensorflow.keras.models import load_model
 
 warnings.filterwarnings("ignore")
 #This will ignore all DeprecationWarning warnings in your code.
 CHUNKSIZE = 1024
 SR = 24050
+model = load_model('model.h5')
 
 stream_active = True
 stop_event = threading.Event()
