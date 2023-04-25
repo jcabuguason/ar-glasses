@@ -64,45 +64,10 @@ export class SpeechComponent {
       //   '\n(2023-01-20:12:24:20) Yes please. Can I get an iced caffe americano?'
       // );
     }, 4000);
-
-    // setTimeout(() => {
-    //   this.messageLog = this.messageLog.concat(
-    //     '\n(2023-01-20:12:24:42) Of course.'
-    //   );
-    // }, 6000);
-
-    // let number = 8000;
-    // for (let i = 0; i < 2; i++) {
-    //   setTimeout(() => {
-    //     this.messageLog = this.messageLog.concat('\n...');
-    //   }, (number += 2000));
-    // }
-
-    // setTimeout(() => {
-    //   this.messageLog = this.messageLog.concat(
-    //     '\n(2023-01-20:12:34:42) Next stop. Dundas Station.'
-    //   );
-    // }, (number += 2000));
-
-    // setTimeout(() => {
-    //   this.messageLog = this.messageLog.concat(
-    //     '\n(2023-01-20:12:35:42) Now arriving at Dundas Station.'
-    //   );
-    // }, (number += 2000));
-
-    // setTimeout(() => {
-    //   this.messageLog = this.messageLog.concat('\n...');
-    // }, (number += 2000));
-
-    // setTimeout(() => {
-    //   this.messageLog = this.messageLog.concat(
-    //     '\n(2023-01-20:12:40:42) Hello class.'
-    //   );
-    // }, (number += 2000));
   }
 
   copyText(){
-    this.clipBoard.copy(this.messageLog);
+    this.clipBoard.copy(this.messageLog || "N/A");
   }
 
   clearText() {

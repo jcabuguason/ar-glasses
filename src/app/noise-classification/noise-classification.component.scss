@@ -4,7 +4,8 @@
   align-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height:100vh;
+  padding-top:10vh
 }
 
 .classification-circle{
@@ -13,8 +14,8 @@
   color: white;
   background: rgb(47 42 173 / 58%);
   border-radius: 100%;
-  height: 500px;
-  width: 500px;
+  height: 50vh;
+  width: 50vh;
   display:flex;
   justify-content: center;
   flex-direction: column;

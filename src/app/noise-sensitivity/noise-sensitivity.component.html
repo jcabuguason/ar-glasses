@@ -1,25 +1,39 @@
-<div class="option" [formGroup]="this.inputGroup">
 
-  <div >
-    <p-card
-      id="classificationData"
-      header="Machine Learning Classification"
-      styleClass="p-card-shadow"
-    >
-      <div class="card-container">
-        <label for="noise-sensitivity-slider"
-          >Displays the current noise classification of processed sound</label
-        >
-        <div disabled class="card-slider">
-          <div class="option-value">{{ classificationValue }}</div>
-        </div>
+<div class="input-container gradientanimation">
+  <div class="glasses-input">
+    <div style="position:relative; top:0; left:0">
+      <img src="../../assets/ar-glasses2.png" class="glasses-picture">
+      <div class="circle circle1" (click)="goToBrightness()">
+        OLED Display
       </div>
-      <ng-template pTemplate="footer"> </ng-template>
-    </p-card>
+      <div class="circle circle2" (click)="goToNoiseSensitivity()">
+        Noise Sensitivity
+      </div>
+      <div class="circle circle3" (click)="goToToggle()" href="#processingToggle" >
+        Toggles
+      </div>
+    </div>
+  </div>
+  <div  class="option" [formGroup]="this.inputGroup"> 
+    <div >
+      <p-card
+        id="classificationData"
+        header="Noise Classification"
+        styleClass="p-card-shadow"
+      >
+        <div class="card-container">
+          <label for="noise-sensitivity-slider"
+            >Displays the current noise classification of processed sound</label
+          >
+          <div disabled class="card-slider">
+            <div class="option-value">{{ classificationValue }}</div>
+          </div>
+        </div>
+        <ng-template pTemplate="footer"> </ng-template>
+      </p-card>
+  
+    <br />
 
-  <br />
-
-  <div >
     <p-card
       id="noiseSensitivity"
       header="Noise Sensitivity"

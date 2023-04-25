@@ -25,14 +25,14 @@ export class NoiseSensitivityComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
 
-    this.inputGroup = new FormGroup({
-      noiseSensitivity: new FormControl(0),
-      vibrationSensitivity: new FormControl(0),
-      fontSize: new FormControl(0),
-      displayBrightness: new FormControl(0),
-      processingToggle: new FormControl(false),
-      classificationToggle: new FormControl(false)
-   });
+  this.inputGroup = new FormGroup({
+    noiseSensitivity: new FormControl(0),
+    vibrationSensitivity: new FormControl(0),
+    fontSize: new FormControl(0),
+    displayBrightness: new FormControl(0),
+    processingToggle: new FormControl(false),
+    classificationToggle: new FormControl(false)
+  });
 
 
 
@@ -84,5 +84,32 @@ export class NoiseSensitivityComponent implements OnInit {
       inputID: inputType,
       inputValue: value
     }))
+  }
+
+  goToToggle(){
+    console.log('hello')
+
+    const toggle = document.querySelector('#processingToggle');
+    // Scroll to the section
+    toggle?.scrollIntoView({ behavior: 'smooth' });
+
+  }
+
+  goToBrightness(){
+    console.log('hello')
+
+    const toggle = document.querySelector('#displayBrightness');
+    // Scroll to the section
+    toggle?.scrollIntoView({ behavior: 'smooth' });
+
+  }
+
+
+  goToNoiseSensitivity(){
+    console.log('hello')
+
+    const toggle = document.querySelector('#noiseSensitivity');
+    // Scroll to the section
+    toggle?.scrollIntoView({ behavior: 'smooth' });
   }
 }

@@ -4,10 +4,29 @@ body{
   align-items: center;
 }
 
-.option{
+.input-container{
+  display:flex;
+  overflow-y: hidden;
+}
+
+.glasses-input{
   width:80%;
+  height:100vh;
   margin: auto;
   padding: 2em;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.option{
+  margin: auto;
+  margin-top:10vh;
+  height:85vh;
+  width:80%;
+  padding: 2em;
+  overflow-y:scroll;
+  overflow-x:hidden;
 }
 
 .option-value{
@@ -33,3 +52,63 @@ body{
   width:50%;
 }
 
+.circle{
+  position: absolute;
+  background: rgb(83 99 143);
+  height: 8vw;
+  width: 8vw;
+  border-radius: 100%;
+  border: 5px solid lavender;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  align-items: center;
+  font-size: 1.5em;
+  padding: 2em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.circle1{
+  left: 28%;
+  top: 7%;
+}
+.circle2{
+  top: 73%;
+}
+
+.circle3{
+  left: 83%;
+  top: 0%;
+}
+
+.circle:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  background:rgb(130, 141, 172);
+}
+
+.glasses-picture{
+  position:relative; 
+  top:0px; left:0px;  width:100%; height: auto;
+}
+
+.gradientanimation {
+	background: linear-gradient(-45deg, #654E92,  #6C9BCF, #7e9ec0,#617c96,);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

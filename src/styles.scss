@@ -15,10 +15,15 @@ html {
     background: blue !important;
   }
   p-card {
-    .p-card-shadow {
+    .p-card-body{
+      font-size: 1em; 
+      padding: 3em 1em 2em 2em;
+    }
+      .p-card-shadow {
       background: #f4f4f4;
     }
     .p-card-title {
+      font-size:1.5em;
       color: rgb(77, 77, 77);
     }
   }

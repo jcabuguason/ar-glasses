@@ -3,8 +3,11 @@
   flex-direction: column;
   margin: auto;
   background: inherit ;
-  height: 100%;
-  width: 99%;
+  margin-top: 0vh;
+  height: 95vh;
+  padding-top: 10vh;
+  width: 100%;
+  background: whitesmoke;
 }
 
 .speech-row-container {
@@ -15,6 +18,7 @@
 }
 
 #speech-log {
+  font-size:large;
   width: 80%;
   display: flex;
   flex-direction: column;
